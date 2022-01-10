@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Login - To Do List
+{% endblock title %}
+
+{% block content %}
+    <form method="post">
+        {{ form.hidden_tag() }}
+        {{ form.username.label() }}
+        {{ form.username() }}
+        {{ form.password.label() }}
+        {{ form.password() }}
+        {{ form.submit() }}
+    </form>
+{% endblock content %}
+    

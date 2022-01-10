@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Sign Up - To Do List
+{% endblock title %}
+
+{% block content %}
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.username.label() }}
+        {{ form.username(placeholder="Usuario") }}
+        {{ form.email.label() }}
+        {{ form.email(placeholder="Correo Electrónico") }}
+        {{ form.password.label() }}
+        {{ form.password(placeholder="Contraseña") }}
+        {{ form.passwordconfirm.label() }}
+        {{ form.passwordconfirm(placeholder="Confirmar Contraseña") }}
+        {{ form.submit() }}
+    </form>
+{% endblock content %}
+    

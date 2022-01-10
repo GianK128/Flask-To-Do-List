@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ user }}'s lists - To Do List
+{% endblock title %}
+
+{% block content %}
+    <h1>{{ user }}'s lists</h1>
+    {% for list in lists %}
+        <a href="{{ url_for('list.user_list', user=user, listname=list.name) }}">{{ list.name }}</a>
+        {% if current_user.username == user %}
+            <form action="{{ url_for('list.delete', list=list.id) }}" method="POST">
+                {{ form.hidden_tag() }}
+                {{ form.id(value=list.id, type="hidden") }}
+                {{ form.submit() }}
+            </form>
+        {% endif %}
+    {% endfor %}
+    {% if current_user.username == user %}
+        <a href="{{ url_for('list.create') }}">Create new list</a>
+    {% endif %}
+{% endblock content %}
+    

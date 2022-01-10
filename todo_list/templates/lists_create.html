@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Create List - To Do List
+{% endblock title %}
+
+{% block content %}
+    <h1>Create a new list</h1>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.name.label() }}
+        {{ form.name() }}
+        {{ form.submit() }}
+    </form>
+{% endblock content %}
+    

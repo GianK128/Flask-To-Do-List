@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Home - To Do List
+{% endblock title %}
+
+{% block content %}
+    {% if current_user.is_authenticated %}
+        <h1>To Do List</h1>
+        <p>¿Qué va a hacer hoy?</p>
+        <a href="{{ url_for('list.create') }}">Create List</a>
+        <a href="{{ url_for('list.my_lists', user = current_user.username) }}">See My Lists</a>
+    {% else %}
+        <h1>Home Page</h1>
+        <p>Bienvenido a To Do List</p>
+        <a href="{{ url_for('auth.sign_up') }}">Sign Up</a>
+        <a href="{{ url_for('auth.login') }}">Login</a>
+    {% endif %}
+{% endblock content %}
+    

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ list.name }} - To Do List
+{% endblock title %}
+
+{% block content %}
+    <h2>{{ user }}</h2>
+    <h1>{{ list.name }}</h1>
+    <ul>
+    {% for item in items %}
+        <li>[{{ item.date_written }}] {{ item.content }} Completado: {{ item.completed }}
+            {% if current_user.username == user %}
+                <form action="{{ url_for('list.complete_item') }}" method="POST">
+                    {{ edit_form.hidden_tag() }}
+                    {{ edit_form.list_id(value=list.id, type="hidden") }}
+                    {{ edit_form.id(value=item.id, type='hidden') }}
+                    {{ edit_form.submit(value='Completar') }}
+                </form>
+                <form action="{{ url_for('list.delete_item') }}" method="POST">
+                    {{ edit_form.hidden_tag() }}
+                    {{ edit_form.list_id(value=list.id, type="hidden") }}
+                    {{ edit_form.id(value=item.id, type='hidden') }}
+                    {{ edit_form.submit(value='Borrar') }}
+                </form>
+            {% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+    
+    {% if current_user.username == user %}
+        <h2>Add Item</h2>    
+        <form action="{{ url_for('list.add_item') }}" method="POST">
+            {{ form.hidden_tag() }}
+            {{ form.list_id(value=list.id, type="hidden") }}
+            {{ form.content.label() }}
+            {{ form.content() }}
+            {{ form.submit() }}
+        </form>
+    {% endif %}
+{% endblock content %}
