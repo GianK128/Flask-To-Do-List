@@ -8,14 +8,14 @@ from flask_login import current_user
 
 list = Blueprint('list', __name__)
 
-@list.route('my-lists/<user>')
+@list.route('<user>')
 def my_lists(user):
     form = DeleteListForm()
     _user = User.query.filter_by(username=user).first()
     user_lists = List.query.filter_by(user_id=_user.id).all()
     return render_template('lists.html', user=_user.username, lists=user_lists, form=form)
 
-@list.route('my-lists/<user>/<listname>')
+@list.route('<user>/<listname>')
 def user_list(user, listname):
     form = AddItemForm()
     edit_form = EditItemForm()

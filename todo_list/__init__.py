@@ -25,4 +25,4 @@ from todo_list.list import list
 
 app.register_blueprint(routes, url_prefix='/')
 app.register_blueprint(auth, url_prefix='/auth/')
-app.register_blueprint(list, url_prefix='/list/')
+app.register_blueprint(list, url_prefix='/lists/')
