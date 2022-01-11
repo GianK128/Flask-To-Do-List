@@ -1,7 +1,13 @@
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import backref, relationship
 from todo_list import db, bcrypt, login_manager
 from flask_login import UserMixin
 from sqlalchemy.sql import func
+
+userRelationship = db.Table('user_relationship', db.Model.metadata,
+    db.Column('first_user_id', db.Integer(), db.ForeignKey('user.id'), primary_key=True),
+    db.Column('second_user_id', db.Integer(), db.ForeignKey('user.id'), primary_key=True),
+    db.Column('relation_status', db.Integer, nullable=False)
+)
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -13,6 +19,12 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password_hash = db.Column(db.String(60), nullable=False)
     lists = db.relationship('List', backref='user', lazy=True)
+    relations = db.relationship('User', 
+        secondary = userRelationship,
+        primaryjoin = id == userRelationship.c.first_user_id,
+        secondaryjoin = id == userRelationship.c.second_user_id,
+        backref = backref('users')
+    )
 
     @property
     def password(self):
