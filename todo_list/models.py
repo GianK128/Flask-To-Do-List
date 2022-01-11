@@ -18,7 +18,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(30), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password_hash = db.Column(db.String(60), nullable=False)
-    lists = db.relationship('List', backref='user', lazy=True)
+    lists = db.relationship('List', backref='user', lazy=True, cascade="all, delete")
     relations = db.relationship('User', 
         secondary = userRelationship,
         primaryjoin = id == userRelationship.c.first_user_id,
@@ -44,7 +44,7 @@ class List(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
     name = db.Column(db.String(80), nullable=False)
     completed = db.Column(db.Boolean(), default=False)
-    items = db.relationship('Item', backref='list', lazy=True)
+    items = db.relationship('Item', backref='list', lazy=True, cascade="all, delete")
     user_id = db.Column(db.Integer(), db.ForeignKey('user.id'))
 
     def __repr__(self):
