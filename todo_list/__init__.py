@@ -22,7 +22,10 @@ login_manager.login_message = 'Se requiere una cuenta.'
 from todo_list.routes import routes
 from todo_list.auth import auth
 from todo_list.list import list
+from todo_list.friends import friends
 
 app.register_blueprint(routes, url_prefix='/')
 app.register_blueprint(auth, url_prefix='/auth/')
 app.register_blueprint(list, url_prefix='/lists/')
+app.register_blueprint(friends, url_prefix='/friends/')
+

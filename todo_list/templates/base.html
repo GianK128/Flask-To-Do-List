@@ -18,6 +18,7 @@
             <ul>
                 <li><a href="{{ url_for('routes.home') }}">Home</a></li>
                 <li><a href="{{ url_for('list.my_lists', user=current_user.username) }}">{{ current_user.username }}</a></li>
+                <li><a href="{{ url_for('friends.friend_list') }}">Friends</a></li>
                 <li><a href="{{ url_for('auth.logout') }}">Log out</a></li>
             </ul>
         {% else %}
