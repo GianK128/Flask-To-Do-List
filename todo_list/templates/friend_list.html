@@ -18,11 +18,14 @@
         <p>{{ user }} no tiene amigos :(</p>
     {% endif %}
 
-    <h2>Buscar usuarios</h2>
-    <input type="text" name="userSearch" id="userSearch">
-    <ul name="userSearchList" id="userSearchList">
-        <li>No se ha buscado nada todavía</li>
-    </ul>
+    {% if current_user.username == user %}
+        <h2>Buscar usuarios</h2>
+        <input type="text" name="userSearch" id="userSearch">
+        <ul name="userSearchList" id="userSearchList">
+            <li>No se ha buscado nada todavía</li>
+        </ul>
 
-    <script src="{{ url_for('static', filename='friendSearch.js') }}"></script>
+        <script src="{{ url_for('static', filename='friendSearch.js') }}"></script>
+    {% endif %}
+        
 {% endblock content %}
