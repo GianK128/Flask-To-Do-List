@@ -4,11 +4,14 @@ from todo_list import db, bcrypt, login_manager
 from flask_login import UserMixin
 from sqlalchemy.sql import func
 
-class UserRelationship(db.Model):
-    first_user_id = db.Column(db.Integer(), db.ForeignKey('user.id'), primary_key=True)
-    second_user_id = db.Column(db.Integer(), db.ForeignKey('user.id'), primary_key=True)
-    relation_status = db.Column(db.Integer(), nullable=False, default=1)
-    second_user = db.relationship('User', backref='subrelations', foreign_keys=[second_user_id])
+friends_table = db.Table("friend_relationship", db.Model.metadata,
+    db.Column('first_user_id', db.Integer(), db.ForeignKey('user.id'), primary_key=True),
+    db.Column('second_user_id', db.Integer(), db.ForeignKey('user.id'), primary_key=True)
+)
+friend_requests_table = db.Table("friend_request", db.Model.metadata,
+    db.Column('first_user_id', db.Integer(), db.ForeignKey('user.id'), primary_key=True),
+    db.Column('second_user_id', db.Integer(), db.ForeignKey('user.id'), primary_key=True)
+)
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -20,9 +23,17 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password_hash = db.Column(db.String(60), nullable=False)
     lists = db.relationship('List', backref='user', lazy=True, cascade="all, delete")
-    relations = db.relationship('UserRelationship',
-        primaryjoin = id == UserRelationship.first_user_id,
-        backref = backref('first_user')
+    friends = db.relationship('User',
+        secondary = friends_table,
+        primaryjoin = id == friends_table.c.first_user_id,
+        secondaryjoin = id == friends_table.c.second_user_id,
+        backref = backref('users')
+    )
+    friend_requests = db.relationship('User',
+        secondary = friend_requests_table,
+        primaryjoin = id == friend_requests_table.c.first_user_id,
+        secondaryjoin = id == friend_requests_table.c.second_user_id,
+        backref = backref('users_requested')
     )
 
     @property

@@ -11,7 +11,7 @@
     {% if friends %}
         <ul>
             {% for friend in friends %}
-                <li>{{ friend.username }}</li>
+                <li><a href="{{ url_for('list.my_lists', user=friend.username) }}">{{ friend.username }}</a></li>
             {% endfor %}
         </ul>
     {% else %}
@@ -19,6 +19,21 @@
     {% endif %}
 
     {% if current_user.username == user %}
+        <h2>Solicitudes</h2>
+        {% if requests %}
+            <ul>
+                {% for request in requests %}
+                    <li>
+                        {{ request.username }}
+                        <a href="{{ url_for('friends.request_action', request_action='accept', to_user=request.username) }}">Aceptar</a>
+                        <a href="{{ url_for('friends.request_action', request_action='reject', to_user=request.username) }}">Denegar</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            No tienes solicitudes.
+        {% endif %}
+
         <h2>Buscar usuarios</h2>
         <input type="text" name="userSearch" id="userSearch">
         <ul name="userSearchList" id="userSearchList">
