@@ -3,7 +3,7 @@ from flask.templating import render_template
 from flask_login.utils import login_required
 from todo_list import db
 from todo_list.forms import CreateListForm, DeleteListForm, AddItemForm, EditItemForm
-from todo_list.models import User, List, Item
+from todo_list.models import User, List, Item, ActivityLog
 from flask_login import current_user
 
 list = Blueprint('list', __name__)
@@ -33,6 +33,16 @@ def create():
             user_id = current_user.id
         )
         db.session.add(new_list)
+        db.session.commit()
+
+        new_log = ActivityLog(
+            type = 4,
+            list_id = new_list.id
+        )
+        db.session.add(new_log)
+        db.session.commit()
+
+        current_user.activities.append(new_log)
         db.session.commit()
         return redirect(url_for('list.user_list', user=current_user.username, listname=new_list.name))
     return render_template('lists_create.html', form=form)
@@ -86,6 +96,9 @@ def delete(list):
     form = DeleteListForm()
     if form.validate_on_submit():
         _list = List.query.get(list)
+        _logs = ActivityLog.query.filter_by(list_id=_list.id)
         db.session.delete(_list)
+        for log in _logs:
+            db.session.delete(log)
         db.session.commit()
     return redirect(url_for('list.my_lists', user=current_user.username))

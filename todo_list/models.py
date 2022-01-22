@@ -27,13 +27,19 @@ class User(db.Model, UserMixin):
         secondary = friends_table,
         primaryjoin = id == friends_table.c.first_user_id,
         secondaryjoin = id == friends_table.c.second_user_id,
+        cascade = "all, delete",
         backref = backref('users')
     )
     friend_requests = db.relationship('User',
         secondary = friend_requests_table,
         primaryjoin = id == friend_requests_table.c.first_user_id,
         secondaryjoin = id == friend_requests_table.c.second_user_id,
+        cascade = "all, delete",
         backref = backref('users_requested')
+    )
+    activities = db.relationship('ActivityLog',
+        cascade = "all, delete",
+        backref = backref('user')
     )
 
     @property
@@ -69,3 +75,15 @@ class Item(db.Model):
 
     def __repr__(self):
         return f"<Item ({self.id}) - Contained in list {self.list_id}>"
+
+class ActivityLog(db.Model):
+    id = db.Column(db.Integer(), primary_key = True)
+    type = db.Column(db.Integer(), nullable=False)
+    user_id = db.Column(db.Integer(), db.ForeignKey('user.id'))
+    friend_id = db.Column(db.Integer())
+    list_id = db.Column(db.Integer(), db.ForeignKey('list.id'))
+    item_id = db.Column(db.Integer(), db.ForeignKey('item.id'))
+    date = db.Column(db.DateTime(timezone=True), default=func.now())
+
+    def __repr__(self):
+        return f"<Post ({self.id}) - Type {self.type}, created at {self.date}>"
