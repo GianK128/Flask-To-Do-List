@@ -1,6 +1,7 @@
 from flask import Blueprint, flash, redirect, url_for
 from flask.templating import render_template
 from flask_login.utils import login_required
+import sqlalchemy
 from todo_list import db
 from todo_list.forms import CreateListForm, DeleteListForm, AddItemForm, EditItemForm
 from todo_list.models import User, List, Item, ActivityLog
@@ -95,17 +96,21 @@ def complete_item():
                     break
         else:
             completed = False
+        _item.list.completed = completed
+        db.session.commit()
+
+        # Agregar log si la lista está completa
         if completed:
-            _item.list.completed = completed
-            _log = ActivityLog(
+            new_log = ActivityLog(
                 type = 2,
                 list_id = _item.list.id
             )
-            db.session.add(_log)
-            current_user.activities.append(_log)
+            db.session.add(new_log)
+            current_user.activities.append(new_log)
         else:
-            _log = ActivityLog.query.filter_by(list_id=_item.list.id).first()
-            db.session.delete(_log)
+            _log = ActivityLog.query.filter_by(list_id = _item.list.id).first()
+            if _log:
+                db.session.delete(_log)
         db.session.commit()
 
         listname = List.query.filter_by(id=form.list_id.data).first().name
