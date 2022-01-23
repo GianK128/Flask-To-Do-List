@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, render_template, redirect, url_for, flash, request
 from flask_login import login_required, current_user
 from todo_list import db
-from todo_list.models import User, friend_requests_table
+from todo_list.models import User, friend_requests_table, ActivityLog
 
 friends = Blueprint('friends', __name__)
 
@@ -38,6 +38,12 @@ def request_action(request_action):
     if request_action == 'accept':
         current_user.friends.append(_sender)
         _sender.friends.append(current_user)
+        _log = ActivityLog(
+            type = 3,
+            friend_id = _sender.id
+        )
+        db.session.add(_log)
+        current_user.activities.append(_log)
     elif request_action == 'reject':
         flash(f"Rejected {to_user}'s request.", category='info')
     db.session.commit()

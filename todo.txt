@@ -1,6 +1,8 @@
 - Hacer feed de actividad de amigos
 - Cambiar algunos URL por variables tipo php
 - Agregar imagenes de perfil
+- Cambiar metodos HTTP
+- Crear API para algunas funciones
 
 - Hacer que la lista aparezca como completada al completarse todos los items
 - Ver en el perfil de una persona si es tu amigo
@@ -16,7 +18,7 @@ ESTADO DE RELACIONES:
 3 - Bloqueado           -
 
 ESTADO DE ACTIVIDADES:
-1 - Item completado     -
-2 - Lista completada    -
-3 - Anuncio de amistad  -
+1 - Item completado     - DONE
+2 - Lista completada    - DONE
+3 - Anuncio de amistad  - DONE
 4 - Creación de lista   - DONE

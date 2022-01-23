@@ -66,11 +66,48 @@ def add_item():
 def complete_item():
     form = EditItemForm()
     if form.validate_on_submit():
+        # Alternar entre completado o no
         _item = Item.query.filter_by(id=form.id.data).first()
         if _item.list_id != int(form.list_id.data):
             return '<h1>WTF LISTA INCORRECTA</h1>'
         _item.completed = not _item.completed
         db.session.commit()
+
+        # Agregar o quitar log de actividad
+        if _item.completed:
+            new_log = ActivityLog(
+                type = 1,
+                item_id = _item.id
+            )
+            db.session.add(new_log)
+            current_user.activities.append(new_log)
+        else:
+            _log = ActivityLog.query.filter_by(item_id = _item.id).first()
+            db.session.delete(_log)
+        db.session.commit()
+
+        # Completar lista si están completados todos los items
+        completed = True
+        if _item.list.items:
+            for item in _item.list.items:
+                if not item.completed:
+                    completed = False
+                    break
+        else:
+            completed = False
+        if completed:
+            _item.list.completed = completed
+            _log = ActivityLog(
+                type = 2,
+                list_id = _item.list.id
+            )
+            db.session.add(_log)
+            current_user.activities.append(_log)
+        else:
+            _log = ActivityLog.query.filter_by(list_id=_item.list.id).first()
+            db.session.delete(_log)
+        db.session.commit()
+
         listname = List.query.filter_by(id=form.list_id.data).first().name
         return redirect(url_for('list.user_list', user=current_user.username, listname=listname))
     else:
@@ -81,9 +118,15 @@ def delete_item():
     form = EditItemForm()
     if form.validate_on_submit():
         _item = Item.query.filter_by(id=form.id.data).first()
-        if _item.list_id != int(form.list_id.data):
+        _logs = ActivityLog.query.filter_by(item_id=_item.id)
+
+        if _item.list_id != int(form.list_id.data): 
             return '<h1>WTF LISTA INCORRECTA</h1>'
+
         db.session.delete(_item)
+        for log in _logs:
+            db.session.delete(log)
+
         db.session.commit()
         listname = List.query.filter_by(id=form.list_id.data).first().name
         return redirect(url_for('list.user_list', user=current_user.username, listname=listname))
