@@ -1,8 +1,11 @@
+= TODO:
 - Cambiar algunos URL por variables tipo php
-- Agregar imagenes de perfil
 - Cambiar metodos HTTP
 - Crear API para algunas funciones
+- Agregar imagenes de perfil
+- Agregar funcion de bloquear usuarios
 
+= QoL:
 - Ver en el perfil de una persona si es tu amigo
 - Ver en la busqueda si ya es tu amigo
 - Hacer que no se pueda agregar si ya es tu amigo
