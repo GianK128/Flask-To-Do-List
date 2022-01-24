@@ -1,10 +1,8 @@
-- Hacer feed de actividad de amigos
 - Cambiar algunos URL por variables tipo php
 - Agregar imagenes de perfil
 - Cambiar metodos HTTP
 - Crear API para algunas funciones
 
-- Hacer que la lista aparezca como completada al completarse todos los items
 - Ver en el perfil de una persona si es tu amigo
 - Ver en la busqueda si ya es tu amigo
 - Hacer que no se pueda agregar si ya es tu amigo

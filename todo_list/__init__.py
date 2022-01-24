@@ -29,3 +29,21 @@ app.register_blueprint(auth, url_prefix='/auth/')
 app.register_blueprint(list, url_prefix='/lists/')
 app.register_blueprint(friends, url_prefix='/friends/')
 
+from todo_list.models import Item, List, User
+
+@app.context_processor
+def utility_processor():
+    def get_item_name(item_id):
+        return Item.query.get(item_id).content
+
+    def get_list_name(list_id):
+        return List.query.get(list_id).name
+
+    def get_username(user_id):
+        return User.query.get(user_id).username
+
+    return dict(
+        get_item_name = get_item_name,
+        get_list_name = get_list_name,
+        get_username = get_username
+    )

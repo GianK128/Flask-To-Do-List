@@ -1,7 +1,6 @@
 from flask import Blueprint, flash, redirect, url_for
 from flask.templating import render_template
 from flask_login.utils import login_required
-import sqlalchemy
 from todo_list import db
 from todo_list.forms import CreateListForm, DeleteListForm, AddItemForm, EditItemForm
 from todo_list.models import User, List, Item, ActivityLog
@@ -20,7 +19,8 @@ def my_lists(user):
 def user_list(user, listname):
     form = AddItemForm()
     edit_form = EditItemForm()
-    _list = List.query.filter_by(name=listname).first()
+    _user = User.query.filter_by(username=user).first()
+    _list = List.query.filter_by(name=listname, user_id=_user.id).first()
     item_list = Item.query.filter_by(list_id=_list.id).all()
     return render_template('list_items.html', user=user, list=_list, items=item_list, form=form, edit_form=edit_form)
 
@@ -78,7 +78,8 @@ def complete_item():
         if _item.completed:
             new_log = ActivityLog(
                 type = 1,
-                item_id = _item.id
+                item_id = _item.id,
+                list_id = int(form.list_id.data)
             )
             db.session.add(new_log)
             current_user.activities.append(new_log)
