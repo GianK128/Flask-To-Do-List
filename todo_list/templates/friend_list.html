@@ -25,8 +25,8 @@
                 {% for request in requests %}
                     <li>
                         {{ request.username }}
-                        <a href="{{ url_for('friends.request_action', request_action='accept', to_user=request.username) }}">Aceptar</a>
-                        <a href="{{ url_for('friends.request_action', request_action='reject', to_user=request.username) }}">Denegar</a>
+                        <a href="{{ url_for('friends.request_action', action='accept', to_user=request.username) }}">Aceptar</a>
+                        <a href="{{ url_for('friends.request_action', action='reject', to_user=request.username) }}">Denegar</a>
                     </li>
                 {% endfor %}
             </ul>

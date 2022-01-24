@@ -26,7 +26,7 @@ from todo_list.friends import friends
 
 app.register_blueprint(routes, url_prefix='/')
 app.register_blueprint(auth, url_prefix='/auth/')
-app.register_blueprint(list, url_prefix='/lists/')
+app.register_blueprint(list, url_prefix='/')
 app.register_blueprint(friends, url_prefix='/friends/')
 
 from todo_list.models import Item, List, User

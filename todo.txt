@@ -1,5 +1,4 @@
 = TODO:
-- Cambiar algunos URL por variables tipo php
 - Cambiar metodos HTTP
 - Crear API para algunas funciones
 - Agregar imagenes de perfil

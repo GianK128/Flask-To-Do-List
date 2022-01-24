@@ -7,7 +7,7 @@ userSearchBar.addEventListener('input', (e) => {
         userSearchList.innerHTML = '';
         userSearchList.insertAdjacentHTML('afterbegin', '<li>No se ha buscado nada todavía</li>');
     } else {
-        fetch(`http://127.0.0.1:5000/friends/search-user/${e.target.value}`)
+        fetch(`http://127.0.0.1:5000/friends/search-user?user=${e.target.value}`)
             .then(response => response.json())
             .then(data => {
                 userSearchList.innerHTML = '';
@@ -16,7 +16,7 @@ userSearchBar.addEventListener('input', (e) => {
                 } else {
                     data.forEach(user => {
                         userSearchList.insertAdjacentHTML('afterbegin', 
-                            `<li><a href="http://127.0.0.1:5000/lists/${user}">${user}</a> <a href="http://127.0.0.1:5000/friends/add/${user}">Agregar</a></li>`);
+                            `<li><a href="http://127.0.0.1:5000/${user}">${user}</a> <a href="http://127.0.0.1:5000/friends/add?user=${user}">Agregar</a></li>`);
                     });
                 }
             });

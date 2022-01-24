@@ -1,4 +1,4 @@
-from flask import Blueprint, flash, redirect, url_for
+from flask import Blueprint, redirect, url_for, request
 from flask.templating import render_template
 from flask_login.utils import login_required
 from todo_list import db
@@ -24,7 +24,7 @@ def user_list(user, listname):
     item_list = Item.query.filter_by(list_id=_list.id).all()
     return render_template('list_items.html', user=user, list=_list, items=item_list, form=form, edit_form=edit_form)
 
-@list.route('create', methods=['GET', 'POST'])
+@list.route('list/create', methods=['GET', 'POST'])
 @login_required
 def create():
     form = CreateListForm()
@@ -48,7 +48,7 @@ def create():
         return redirect(url_for('list.user_list', user=current_user.username, listname=new_list.name))
     return render_template('lists_create.html', form=form)
 
-@list.route('add-item', methods = ['POST'])
+@list.route('list/add-item', methods = ['POST'])
 def add_item():
     form = AddItemForm()
     if form.validate_on_submit():
@@ -63,7 +63,7 @@ def add_item():
     else:
         return '<h1>WTF</h1>'
 
-@list.route('complete-item', methods=['POST'])
+@list.route('list/edit-item', methods=['POST'])
 def complete_item():
     form = EditItemForm()
     if form.validate_on_submit():
@@ -119,7 +119,7 @@ def complete_item():
     else:
         return '<h1>WTF NO VALIDO</h1>'
 
-@list.route('delete-item', methods=['POST'])
+@list.route('list/erase-item', methods=['POST'])
 def delete_item():
     form = EditItemForm()
     if form.validate_on_submit():
@@ -139,9 +139,10 @@ def delete_item():
     else:
         return '<h1>WTF NO VALIDO</h1>'
 
-@list.route('delete/<list>', methods=['GET', 'POST'])
+@list.route('list/delete', methods=['GET', 'POST'])
 @login_required
-def delete(list):
+def delete():
+    list = request.args.get('list')
     form = DeleteListForm()
     if form.validate_on_submit():
         _list = List.query.get(list)

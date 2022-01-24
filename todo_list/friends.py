@@ -5,8 +5,9 @@ from todo_list.models import User, friend_requests_table, ActivityLog
 
 friends = Blueprint('friends', __name__)
 
-@friends.route('search-user/<username>')
-def search_user(username):
+@friends.route('search-user')
+def search_user():
+    username = request.args.get('user')
     query = User.query.filter(User.username.contains(username)).all()
     usernames = [u.username for u in query]
     if current_user.username in usernames: usernames.remove(current_user.username)
@@ -22,16 +23,18 @@ def friend_list(username):
     return render_template('friend_list.html', user=username, friends=_user.friends, requests=friend_requests, friend_count=len(_user.friends))
 
 @login_required
-@friends.route('add/<username>')
-def add(username):
+@friends.route('add')
+def add():
+    username = request.args.get('user')
     _receiver = User.query.filter_by(username=username).first()
     current_user.friend_requests.append(_receiver)
     db.session.commit()
     return redirect(url_for('friends.friend_list', username=current_user.username))
 
 @login_required
-@friends.route('request_action/<request_action>')
-def request_action(request_action):
+@friends.route('request')
+def request_action():
+    request_action = request.args.get('action')
     to_user = request.args.get('to_user')
     _sender = User.query.filter_by(username=to_user).first()
     _sender.friend_requests.remove(current_user)
