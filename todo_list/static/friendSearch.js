@@ -10,7 +10,23 @@ function AddFriend(event, friendName) {
             target.parentNode.insertAdjacentHTML('beforeend', '¡Solicitud enviada!');
             target.remove();
         }
-    })
+    });
+}
+
+function RequestAction(event, action, friendName) {
+    var target = event.target;
+    
+    fetch(`http://127.0.0.1:5000/friends/request?action=${action}&to_user=${friendName}`)
+    .then(response => {
+        if (response.status === 200) {
+            parent = target.parentNode;
+            parent.lastElementChild.remove();
+            parent.lastElementChild.remove();
+            console.log()
+            relationStatus = action === 'accept' ? '¡Solicitud aceptada!' : 'Solicitud rechazada.'
+            parent.insertAdjacentHTML('beforeend', ` ${relationStatus}`);
+        }
+    });
 }
 
 userSearchBar.addEventListener('input', (e) => {
