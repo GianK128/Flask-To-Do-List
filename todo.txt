@@ -1,5 +1,4 @@
 = TODO:
-- Cambiar metodos HTTP
 - Crear API para algunas funciones
 - Agregar imagenes de perfil
 - Agregar funcion de bloquear usuarios
@@ -9,16 +8,3 @@
 - Ver en la busqueda si ya es tu amigo
 - Hacer que no se pueda agregar si ya es tu amigo
 - Hacer CSS y JS
-
-=================================================
-
-ESTADO DE RELACIONES:
-1 - Pendiente           - DONE
-2 - Amigos              - DONE
-3 - Bloqueado           -
-
-ESTADO DE ACTIVIDADES:
-1 - Item completado     - DONE
-2 - Lista completada    - DONE
-3 - Anuncio de amistad  - DONE
-4 - Creación de lista   - DONE
