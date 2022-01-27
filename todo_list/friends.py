@@ -9,10 +9,13 @@ friends = Blueprint('friends', __name__)
 def search_user():
     username = request.args.get('user')
     query = User.query.filter(User.username.contains(username)).all()
-    usernames = [u.username for u in query]
-    if current_user.username in usernames: usernames.remove(current_user.username)
-    for friend in current_user.friends:
-        if friend.username in usernames: usernames.remove(friend.username)
+
+    query.remove(current_user)
+    for user in query:
+        if user in current_user.friends: 
+            query.remove(user)
+
+    usernames = [[u.username, u in current_user.friend_requests] for u in query]
     return jsonify(usernames)
 
 @friends.route('<username>')
