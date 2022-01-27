@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for, flash
-from flask_login import login_user, logout_user
+from flask_login import login_user, logout_user, login_required
 from todo_list.models import User
 from todo_list import db
 
@@ -40,6 +40,7 @@ def login():
             flash("El usuario o la contraseña son incorrectos.", category='danger')
     return render_template('login.html', form=form)
 
+@login_required
 @auth.route('/logout')
 def logout():
     logout_user()
