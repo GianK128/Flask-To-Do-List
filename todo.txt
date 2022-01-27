@@ -4,6 +4,7 @@
 - Agregar funcion de bloquear usuarios
 
 = QoL:
+- Burbuja de notificaciones en amigos (por solicitudes)
 - Ver en el perfil de una persona si es tu amigo
 - Ver en la busqueda si ya es tu amigo
 - Hacer que no se pueda agregar si ya es tu amigo
