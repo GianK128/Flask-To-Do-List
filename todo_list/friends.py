@@ -10,7 +10,7 @@ def search_user():
     username = request.args.get('user')
     query = User.query.filter(User.username.contains(username)).all()
 
-    query.remove(current_user)
+    if current_user in query: query.remove(current_user)
     for user in query:
         if user in current_user.friends: 
             query.remove(user)
@@ -32,7 +32,7 @@ def add():
     _receiver = User.query.filter_by(username=username).first()
     current_user.friend_requests.append(_receiver)
     db.session.commit()
-    return redirect(url_for('friends.friend_list', username=current_user.username))
+    return jsonify(success=True)
 
 @login_required
 @friends.route('request')
