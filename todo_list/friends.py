@@ -53,4 +53,4 @@ def request_action():
     elif request_action == 'reject':
         flash(f"Rejected {to_user}'s request.", category='info')
     db.session.commit()
-    return redirect(url_for('friends.friend_list', username=current_user.username))
+    return jsonify(success=True)
