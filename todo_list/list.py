@@ -1,10 +1,12 @@
-from flask import Blueprint, redirect, url_for, request
+from flask import Blueprint, redirect, url_for, request, flash
 from flask.templating import render_template
 from flask_login.utils import login_required
-from todo_list import db
+from werkzeug.utils import secure_filename
+from todo_list import db, app
 from todo_list.forms import CreateListForm, DeleteListForm, AddItemForm, EditItemForm, ProfilePicForm
 from todo_list.models import User, List, Item, ActivityLog
 from flask_login import current_user
+import os
 
 list = Blueprint('list', __name__)
 
@@ -13,8 +15,7 @@ def my_lists(user):
     form = DeleteListForm()
     picform = ProfilePicForm()
     _user = User.query.filter_by(username=user).first()
-    user_lists = List.query.filter_by(user_id=_user.id).all()
-    return render_template('lists.html', user=_user, lists=user_lists, form=form, picform=picform)
+    return render_template('lists.html', user=_user, lists=_user.lists, form=form, picform=picform)
 
 @list.route('<user>/<listname>')
 def user_list(user, listname):
@@ -153,3 +154,20 @@ def delete():
             db.session.delete(log)
         db.session.commit()
     return redirect(url_for('list.my_lists', user=current_user.username))
+
+@login_required
+@list.route('upload-image', methods=['GET','POST'])
+def upload_image():
+    form = ProfilePicForm()
+    if form.validate_on_submit():
+        img = form.image.data
+        filename = secure_filename(img.filename)
+        img.save(os.path.join(
+            app.config['UPLOAD_FOLDER'], 'profiles', filename
+        ))
+        current_user.pic_path = filename
+        db.session.commit()
+    if form.errors != {}:
+        for err_msg in form.errors.values():
+            flash(err_msg, category='danger')
+    return redirect(url_for('list.my_lists', user='admin'))

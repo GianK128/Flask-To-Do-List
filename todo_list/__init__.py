@@ -3,12 +3,15 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_migrate import Migrate
+from os.path import abspath, dirname, join
 
 DB_NAME = "usernotes.db"
+UPLOAD_FOLDER_PATH = join(abspath(dirname(__file__)), 'static', 'uploads')
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'c9d1cd6d3e0a4fb54a653b98'
 app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER_PATH
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)

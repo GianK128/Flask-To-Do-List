@@ -5,6 +5,7 @@
 {% endblock title %}
 
 {% block content %}
+    <img src="{{ url_for('static', filename='/uploads/profiles/{}'.format(user.pic_path)) }}" alt="Profile Picture">
     <h1>{{ user.username }}'s lists</h1>
     {% for list in lists %}
         <a href="{{ url_for('list.user_list', user=user.username, listname=list.name) }}">{{ list.name }}</a>
