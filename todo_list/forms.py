@@ -62,9 +62,9 @@ class EditItemForm(FlaskForm):
 
 class ProfilePicForm(FlaskForm):
     def validate_id(self, id_to_check):
-        if id_to_check != current_user.id:
+        if int(id_to_check.data) != current_user.id:
             raise ValidationError("No tienes permiso para realizar esta acción")
 
     id = StringField(validators=[DataRequired()])
-    image = FileField("Elegir una imagen", validators=[FileRequired(), FileAllowed(['jpg', 'png'], 'Solo se permiten imagenes (jpg, png).')])
+    image = FileField("Elegir una imagen", validators=[FileRequired(), FileAllowed(['jpg', 'png', 'jpeg'], 'Solo se permiten imagenes (jpg, png).')])
     submit = SubmitField("Subir imagen")
