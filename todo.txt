@@ -1,5 +1,5 @@
 = TODO:
-- Agregar imagenes de perfil
+- Reescalar imagenes de perfil a mas pequeñas.
 - Agregar funcion de bloquear usuarios
 - Agregar autenticacion por mail
 - Agregar posibilidad de cambiar la contraseña
