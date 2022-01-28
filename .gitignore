@@ -3,3 +3,6 @@
 
 # Bases de Datos
 *.db
+
+# Archivos subidos por usuarios
+uploads/
