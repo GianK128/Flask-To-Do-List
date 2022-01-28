@@ -1,5 +1,4 @@
 = TODO:
-- Crear API para algunas funciones
 - Agregar imagenes de perfil
 - Agregar funcion de bloquear usuarios
 
