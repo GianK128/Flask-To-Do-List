@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    {{ user }}'s lists - To Do List
+    {{ user.username }}'s lists - To Do List
 {% endblock title %}
 
 {% block content %}
-    <h1>{{ user }}'s lists</h1>
+    <h1>{{ user.username }}'s lists</h1>
     {% for list in lists %}
-        <a href="{{ url_for('list.user_list', user=user, listname=list.name) }}">{{ list.name }}</a>
-        {% if current_user.username == user %}
+        <a href="{{ url_for('list.user_list', user=user.username, listname=list.name) }}">{{ list.name }}</a>
+        {% if current_user == user %}
             <form action="{{ url_for('list.delete', list=list.id) }}" method="POST">
                 {{ form.hidden_tag() }}
                 {{ form.id(value=list.id, type="hidden") }}
@@ -16,8 +16,18 @@
             </form>
         {% endif %}
     {% endfor %}
-    {% if current_user.username == user %}
+    {% if current_user == user %}
         <a href="{{ url_for('list.create') }}">Create new list</a>
     {% endif %}
+    {% if current_user.is_authenticated %}
+        <h2>Actualizar foto de perfil</h2>
+        <form action="{{ url_for('list.upload_image') }}" method="POST" enctype="multipart/form-data">
+            {{ picform.hidden_tag() }}
+            {{ picform.id(value=user.id, type="hidden") }}
+            {{ picform.image.label() }}
+            {{ picform.image() }}
+            {{ picform.submit() }}
+        </form>
+    {% endif %} 
 {% endblock content %}
     

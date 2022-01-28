@@ -1,7 +1,8 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, FileField
 from wtforms.validators import Length, DataRequired, Email, EqualTo, ValidationError
-from todo_list.models import User, List, Item
+from flask_wtf.file import FileRequired, FileAllowed
+from todo_list.models import User, List
 from flask_login import current_user
 
 class RegisterForm(FlaskForm):
@@ -58,3 +59,12 @@ class EditItemForm(FlaskForm):
     id = StringField(validators=[DataRequired()])
     list_id = StringField(validators=[DataRequired()])
     submit = SubmitField()
+
+class ProfilePicForm(FlaskForm):
+    def validate_id(self, id_to_check):
+        if id_to_check != current_user.id:
+            raise ValidationError("No tienes permiso para realizar esta acción")
+
+    id = StringField(validators=[DataRequired()])
+    image = FileField("Elegir una imagen", validators=[FileRequired(), FileAllowed(['jpg', 'png'], 'Solo se permiten imagenes (jpg, png).')])
+    submit = SubmitField("Subir imagen")

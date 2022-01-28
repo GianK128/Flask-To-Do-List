@@ -2,7 +2,7 @@ from flask import Blueprint, redirect, url_for, request
 from flask.templating import render_template
 from flask_login.utils import login_required
 from todo_list import db
-from todo_list.forms import CreateListForm, DeleteListForm, AddItemForm, EditItemForm
+from todo_list.forms import CreateListForm, DeleteListForm, AddItemForm, EditItemForm, ProfilePicForm
 from todo_list.models import User, List, Item, ActivityLog
 from flask_login import current_user
 
@@ -11,9 +11,10 @@ list = Blueprint('list', __name__)
 @list.route('<user>')
 def my_lists(user):
     form = DeleteListForm()
+    picform = ProfilePicForm()
     _user = User.query.filter_by(username=user).first()
     user_lists = List.query.filter_by(user_id=_user.id).all()
-    return render_template('lists.html', user=_user.username, lists=user_lists, form=form)
+    return render_template('lists.html', user=_user, lists=user_lists, form=form, picform=picform)
 
 @list.route('<user>/<listname>')
 def user_list(user, listname):
