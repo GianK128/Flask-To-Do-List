@@ -6,6 +6,7 @@ from todo_list import db, app
 from todo_list.forms import CreateListForm, DeleteListForm, AddItemForm, EditItemForm, ProfilePicForm
 from todo_list.models import User, List, Item, ActivityLog
 from flask_login import current_user
+from PIL import Image
 import os
 
 list = Blueprint('list', __name__)
@@ -161,10 +162,12 @@ def upload_image():
     form = ProfilePicForm()
     if form.validate_on_submit():
         img = form.image.data
-        filename = secure_filename(img.filename)
-        img.save(os.path.join(
-            app.config['UPLOAD_FOLDER'], 'profiles', filename
-        ))
+        with Image.open(img) as imagen:
+            imagen = imagen.resize((320, 320))
+            filename = secure_filename(img.filename)
+            imagen.save(os.path.join(
+                app.config['UPLOAD_FOLDER'], 'profiles', filename
+            ))
         current_user.pic_path = filename
         db.session.commit()
     if form.errors != {}:
