@@ -5,6 +5,7 @@
 
 = FIXME:
 - Agregar imagenes para anon
+- Mejorar rutas de JS fetch
 
 = QoL:
 - Permitir verificar mail en otro momento que no sea el registro
