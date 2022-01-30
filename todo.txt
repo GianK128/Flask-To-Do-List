@@ -4,7 +4,6 @@
 - Agregar posibilidad de cambiar la contraseña
 
 = QoL:
-- Permitir elegir seccion de la imagen a recortar
 - Burbuja de notificaciones en amigos (por solicitudes)
 - Ver en el perfil de una persona si es tu amigo
 - Ver en la busqueda si ya es tu amigo
