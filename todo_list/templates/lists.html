@@ -4,6 +4,10 @@
     {{ user.username }}'s lists - To Do List
 {% endblock title %}
 
+{% block head_content %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='image-region-selector.css') }}">
+{% endblock head_content %}
+
 {% block content %}
     <img src="{{ url_for('static', filename='/uploads/profiles/{}'.format(user.pic_path)) }}" alt="Profile Picture">
     <h1>{{ user.username }}'s lists</h1>
@@ -22,13 +26,17 @@
     {% endif %}
     {% if current_user.is_authenticated %}
         <h2>Actualizar foto de perfil</h2>
+        <div pic-preview></div>
         <form action="{{ url_for('list.upload_image') }}" method="POST" enctype="multipart/form-data">
             {{ picform.hidden_tag() }}
             {{ picform.id(value=user.id, type="hidden") }}
+            {{ picform.region(type="hidden", **{"pic-cut" : ""}) }}
             {{ picform.image.label() }}
-            {{ picform.image() }}
+            {{ picform.image(**{"pic-input" : ""}) }}
             {{ picform.submit() }}
         </form>
+
+        <script src="{{ url_for('static', filename='imageRegionSelector.js') }}"></script>
     {% endif %} 
 {% endblock content %}
     

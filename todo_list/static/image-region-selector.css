@@ -1,0 +1,26 @@
+[pic-preview] {
+    position: relative;
+    width: 70vw;
+}
+
+[pic-preview] img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16/9;
+}
+
+[pic-preview] .image-selector {
+    cursor: move;
+    z-index: 100;
+    position: absolute;
+    height: 100%;
+    aspect-ratio: 1;
+    top: 0;
+    left: calc(100% * 0.25);
+    border: 3px solid #000;
+    background-color: hsl(0 0% 100% / 0.2);
+}
+
+[pic-preview] .image-selector:active {
+    cursor: move;
+}
