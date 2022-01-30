@@ -4,6 +4,10 @@
 - Agregar posibilidad de cambiar el mail
 - Agregar posibilidad de reiniciar la contraseña
 
+= FIXME:
+- Guardar imagenes de perfil por nombre de usuario
+- Agregar imagenes para anon y que no se borre al cambiar pfp
+
 = QoL:
 - Burbuja de notificaciones en amigos (por solicitudes)
 - Ver en el perfil de una persona si es tu amigo
