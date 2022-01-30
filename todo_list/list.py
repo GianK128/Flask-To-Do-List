@@ -27,8 +27,8 @@ def user_list(user, listname):
     item_list = Item.query.filter_by(list_id=_list.id).all()
     return render_template('list_items.html', user=user, list=_list, items=item_list, form=form, edit_form=edit_form)
 
-@list.route('list/create', methods=['GET', 'POST'])
 @login_required
+@list.route('list/create', methods=['GET', 'POST'])
 def create():
     form = CreateListForm()
     if form.validate_on_submit():
@@ -51,6 +51,7 @@ def create():
         return redirect(url_for('list.user_list', user=current_user.username, listname=new_list.name))
     return render_template('lists_create.html', form=form)
 
+@login_required
 @list.route('list/add-item', methods = ['POST'])
 def add_item():
     form = AddItemForm()
@@ -66,6 +67,7 @@ def add_item():
     else:
         return '<h1>WTF</h1>'
 
+@login_required
 @list.route('list/edit-item', methods=['POST'])
 def complete_item():
     form = EditItemForm()
@@ -122,6 +124,7 @@ def complete_item():
     else:
         return '<h1>WTF NO VALIDO</h1>'
 
+@login_required
 @list.route('list/erase-item', methods=['POST'])
 def delete_item():
     form = EditItemForm()
@@ -142,8 +145,8 @@ def delete_item():
     else:
         return '<h1>WTF NO VALIDO</h1>'
 
-@list.route('list/delete', methods=['GET', 'POST'])
 @login_required
+@list.route('list/delete', methods=['GET', 'POST'])
 def delete():
     list = request.args.get('list')
     form = DeleteListForm()

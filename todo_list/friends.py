@@ -1,10 +1,12 @@
 from flask import Blueprint, jsonify, render_template, redirect, url_for, flash, request
 from flask_login import login_required, current_user
 from todo_list import db
+from todo_list.decorators import confirm_required
 from todo_list.models import User, friend_requests_table, ActivityLog
 
 friends = Blueprint('friends', __name__)
 
+@login_required
 @friends.route('search-user')
 def search_user():
     username = request.args.get('user')
@@ -18,6 +20,8 @@ def search_user():
     usernames = [[u.username, u in current_user.friend_requests] for u in query]
     return jsonify(usernames)
 
+@login_required
+@confirm_required
 @friends.route('<username>')
 def friend_list(username):
     _user = User.query.filter_by(username=username).first()
@@ -26,6 +30,7 @@ def friend_list(username):
     return render_template('friend_list.html', user=username, friends=_user.friends, requests=friend_requests, friend_count=len(_user.friends))
 
 @login_required
+@confirm_required
 @friends.route('add')
 def add():
     username = request.args.get('user')
@@ -35,6 +40,7 @@ def add():
     return jsonify(success=True)
 
 @login_required
+@confirm_required
 @friends.route('request')
 def request_action():
     request_action = request.args.get('action')
