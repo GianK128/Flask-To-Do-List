@@ -10,6 +10,7 @@ UPLOAD_FOLDER_PATH = join(abspath(dirname(__file__)), 'static', 'uploads')
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'c9d1cd6d3e0a4fb54a653b98'
+app.config['SECURITY_PASSWORD_SALT'] = '19e2e8d192515eb0c3708d1c'
 app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER_PATH
 
