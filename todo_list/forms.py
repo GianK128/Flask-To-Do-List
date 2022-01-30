@@ -67,4 +67,5 @@ class ProfilePicForm(FlaskForm):
 
     id = StringField(validators=[DataRequired()])
     image = FileField("Elegir una imagen", validators=[FileRequired(), FileAllowed(['jpg', 'png', 'jpeg'], 'Solo se permiten imagenes (jpg, png).')])
+    region = StringField(validators=[DataRequired()])
     submit = SubmitField("Subir imagen")
