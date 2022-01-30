@@ -6,3 +6,6 @@
 
 # Archivos subidos por usuarios
 uploads/
+
+# Archivos personales
+credentials.txt
