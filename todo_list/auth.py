@@ -1,13 +1,15 @@
+from datetime import datetime
 from flask import Blueprint, render_template, redirect, url_for, flash
 from flask_login import login_user, logout_user, login_required
 from todo_list.models import User
 from todo_list import db
 
 from todo_list.forms import LoginForm, RegisterForm
+from todo_list.token import gen_confirm_token, confirm_token
 
 auth = Blueprint('auth', __name__)
 
-@auth.route('/signup', methods=['GET', 'POST'])
+@auth.route('signup', methods=['GET', 'POST'])
 def sign_up():
     form = RegisterForm()
     if form.validate_on_submit():
@@ -18,6 +20,9 @@ def sign_up():
         )
         db.session.add(new_user)
         db.session.commit()
+
+        token = gen_confirm_token(new_user.email)
+
         login_user(new_user)
         flash("Se ha registrado exitosamente.", category='success')
         return redirect(url_for('list.my_lists', user=new_user.username))
@@ -26,7 +31,7 @@ def sign_up():
             flash(err_msg, category='danger')
     return render_template('sign_up.html', form=form)
 
-@auth.route('/login', methods=['GET', 'POST'])
+@auth.route('login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
@@ -41,7 +46,28 @@ def login():
     return render_template('login.html', form=form)
 
 @login_required
-@auth.route('/logout')
+@auth.route('confirm')
+def confirm_email(token):
+    try:
+        email = confirm_token(token)
+    except:
+        flash('El link de confirmación es invalido o expiró. Intente nuevamente.', 'danger')
+        return redirect(url_for('routes.home'))
+    
+    user = User.query.filter_by(email=email).first_or_404()
+    
+    if user.email_confirmed:
+        flash('Esta cuenta ya está confirmada. Por favor ingrese.', 'success')
+        return redirect(url_for('auth.login'))
+    else:
+        user.email_confirmed = True
+        user.email_confirmed_on = datetime.now()
+        db.session.commit()
+        flash('Esta cuenta ya está confirmada. Por favor ingrese.', 'success')
+    return redirect(url_for('routes.home'))
+
+@login_required
+@auth.route('logout')
 def logout():
     logout_user()
     flash("Te desconectaste del sitio.", category='info')
