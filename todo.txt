@@ -1,14 +1,13 @@
 = TODO:
-- Agregar autenticacion por mail
 - Agregar posibilidad de cambiar la contraseña
 - Agregar posibilidad de cambiar el mail
 - Agregar posibilidad de reiniciar la contraseña
 
 = FIXME:
-- Guardar imagenes de perfil por nombre de usuario
-- Agregar imagenes para anon y que no se borre al cambiar pfp
+- Agregar imagenes para anon
 
 = QoL:
+- Permitir verificar mail en otro momento que no sea el registro
 - Burbuja de notificaciones en amigos (por solicitudes)
 - Ver en el perfil de una persona si es tu amigo
 - Ver en la busqueda si ya es tu amigo
