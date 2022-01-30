@@ -3,6 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_migrate import Migrate
+from flask_mail import Mail
+from os import environ
 from os.path import abspath, dirname, join
 
 DB_NAME = "usernotes.db"
@@ -14,10 +16,18 @@ app.config['SECURITY_PASSWORD_SALT'] = '19e2e8d192515eb0c3708d1c'
 app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER_PATH
 
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USE_SSL'] = True
+app.config['MAIL_USERNAME'] = environ['APP_MAIL_USERNAME']
+app.config['MAIL_PASSWORD'] = environ['APP_MAIL_PASSWORD']
+app.config['MAIL_DEFAULT_SENDER'] = 'giankeberlein.dev.mailsystem@gmail.com'
+
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
+mail = Mail(app)
 
 login_manager.login_view = 'auth.login'
 login_manager.login_message_category = 'info'
