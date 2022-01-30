@@ -7,6 +7,8 @@
 {% block content %}
     <h1>Verificar cuenta</h1>
     <p>Aun no ha verificado su correo electrónico.</p>
-    <p>¿No recibió el correo? <a href="#">Reenviar</a>.</p>
+    <button id='sendBtn'>Enviar correo</button>
+
+    <script src="{{ url_for('static', filename='mailSend.js') }}"></script>
 {% endblock content %}
     
