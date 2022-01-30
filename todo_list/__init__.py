@@ -21,7 +21,7 @@ app.config['MAIL_PORT'] = 465
 app.config['MAIL_USE_SSL'] = True
 app.config['MAIL_USERNAME'] = environ['APP_MAIL_USERNAME']
 app.config['MAIL_PASSWORD'] = environ['APP_MAIL_PASSWORD']
-app.config['MAIL_DEFAULT_SENDER'] = 'giankeberlein.dev.mailsystem@gmail.com'
+app.config['MAIL_DEFAULT_SENDER'] = 'giankeberlein.dev@gmail.com'
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
