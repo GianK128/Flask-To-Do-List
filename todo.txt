@@ -3,6 +3,9 @@
 - Agregar autenticacion por mail
 - Agregar posibilidad de cambiar la contraseña
 
+= FIX:
+- Agregar amistad en ambos sentidos (parece ser que la parte que envio la solicitud sigue podiendo agregar usuarios que ya acepto)
+
 = QoL:
 - Burbuja de notificaciones en amigos (por solicitudes)
 - Ver en el perfil de una persona si es tu amigo
