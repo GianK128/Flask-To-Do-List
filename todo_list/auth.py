@@ -1,6 +1,6 @@
 from datetime import datetime
 from flask import Blueprint, render_template, redirect, url_for, flash, request
-from flask_login import login_user, logout_user, login_required
+from flask_login import current_user, login_user, logout_user, login_required
 from todo_list.models import User
 from todo_list import db
 
@@ -25,7 +25,7 @@ def sign_up():
         token = gen_confirm_token(new_user.email)
         url = url_for('auth.confirm_email', token=token, _external=True)
         html = render_template(
-            'activate_account.html', 
+            'verification/activate_account.html', 
             username=new_user.username,
             confirm_url=url
         )
@@ -33,7 +33,7 @@ def sign_up():
 
         login_user(new_user)
         flash("Se ha registrado exitosamente. Chequee su correo para verificar su cuenta", category='success')
-        return redirect(url_for('list.my_lists', user=new_user.username))
+        return redirect(url_for('auth.unconfirmed'))
     if form.errors != {}:
         for err_msg in form.errors.values():
             flash(err_msg, category='danger')
@@ -73,6 +73,14 @@ def confirm_email():
         db.session.commit()
         flash('Esta cuenta ya está confirmada. Por favor ingrese.', 'success')
     return redirect(url_for('routes.home'))
+
+@login_required
+@auth.route('unconfirmed')
+def unconfirmed():
+    if current_user.confirmed:
+        return redirect(url_for('routes.home'))
+    flash('Por favor verifique su cuenta', 'danger')
+    return render_template('verification/unconfirmed_account.html')
 
 @login_required
 @auth.route('logout')
