@@ -161,6 +161,12 @@ def delete():
 def upload_image():
     form = ProfilePicForm()
     if form.validate_on_submit():
+        if os.path.exists(os.path.join(
+            app.config['UPLOAD_FOLDER'], 'profiles', current_user.pic_path
+        )): os.remove(os.path.join(
+            app.config['UPLOAD_FOLDER'], 'profiles', current_user.pic_path
+        ))
+
         img = form.image.data
         with Image.open(img) as imagen:
             x1, y1, x2, y2 = form.region.data.split('-')
