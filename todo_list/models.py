@@ -23,6 +23,11 @@ class User(db.Model, UserMixin):
     pic_path = db.Column(db.String(120))
     email = db.Column(db.String(120), unique=True, nullable=False)
     password_hash = db.Column(db.String(60), nullable=False)
+
+    registered_on = db.Column(db.DateTime(timezone=True), default=func.now())
+    email_confirmed = db.Column(db.Boolean(), default=False)
+    email_confirmed_on = db.Column(db.DateTime(timezone=True))
+    
     lists = db.relationship('List', backref='user', lazy=True, cascade="all, delete")
     friends = db.relationship('User',
         secondary = friends_table,
