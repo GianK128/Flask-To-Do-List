@@ -156,16 +156,22 @@ def delete():
         db.session.commit()
     return redirect(url_for('list.my_lists', user=current_user.username))
 
+# Helper para mejor lectura
+def delete_img_if_exists_or_not_anon(absolute_path, image_path):
+    if os.path.exists(absolute_path) and image_path != 'anon.jpg':
+        os.remove(absolute_path)
+
 @login_required
 @list.route('upload-image', methods=['GET','POST'])
 def upload_image():
     form = ProfilePicForm()
     if form.validate_on_submit():
-        if os.path.exists(os.path.join(
-            app.config['UPLOAD_FOLDER'], 'profiles', current_user.pic_path
-        )): os.remove(os.path.join(
-            app.config['UPLOAD_FOLDER'], 'profiles', current_user.pic_path
-        ))
+        delete_img_if_exists_or_not_anon(
+            absolute_path = os.path.join(
+                app.config['UPLOAD_FOLDER'], 'profiles', current_user.pic_path
+            ),
+            image_path = current_user.pic_path
+        )
 
         img = form.image.data
         with Image.open(img) as imagen:
@@ -174,7 +180,15 @@ def upload_image():
             y2 = imagen.height
             imagen = imagen.crop((int(x1), y1, int(x2), y2))
             imagen = imagen.resize(size = (320, 320))
+
             filename = secure_filename(img.filename)
+            filename = filename.split('.')
+            if len(filename) != 2: 
+                flash('Nombre de archivo invalido', 'danger')
+                return redirect(url_for('list.my_lists', user=current_user.username))
+            filename[0] = current_user.username
+            filename = '.'.join(filename)
+
             imagen.save(os.path.join(
                 app.config['UPLOAD_FOLDER'], 'profiles', filename
             ))
@@ -183,4 +197,4 @@ def upload_image():
     if form.errors != {}:
         for err_msg in form.errors.values():
             flash(err_msg, category='danger')
-    return redirect(url_for('list.my_lists', user='admin'))
+    return redirect(url_for('list.my_lists', user=current_user.username))
