@@ -21,16 +21,7 @@ def sign_up():
         )
         db.session.add(new_user)
         db.session.commit()
-
-        token = gen_confirm_token(new_user.email)
-        url = url_for('auth.confirm_email', token=token, _external=True)
-        html = render_template(
-            'verification/activate_account.html', 
-            username=new_user.username,
-            confirm_url=url
-        )
-        send_email(new_user.email, "Verificación de correo para su cuenta de To Do List", html)
-
+        
         login_user(new_user)
         flash("Se ha registrado exitosamente. Chequee su correo para verificar su cuenta", category='success')
         return redirect(url_for('auth.unconfirmed'))
@@ -52,6 +43,19 @@ def login():
         else:
             flash("El usuario o la contraseña son incorrectos.", category='danger')
     return render_template('login.html', form=form)
+
+@login_required
+@auth.route('verify/send-email')
+def resend_email():
+    token = gen_confirm_token(current_user.email)
+    url = url_for('auth.confirm_email', token=token, _external=True)
+    html = render_template(
+        'verification/activate_account.html', 
+        username=current_user.username,
+        confirm_url=url
+    )
+    send_email(current_user.email, "[To Do List] Confirmación de su cuenta", html)
+    return {}
 
 @login_required
 @auth.route('confirm')
@@ -77,7 +81,7 @@ def confirm_email():
 @login_required
 @auth.route('unconfirmed')
 def unconfirmed():
-    if current_user.confirmed:
+    if current_user.email_confirmed:
         return redirect(url_for('routes.home'))
     flash('Por favor verifique su cuenta', 'danger')
     return render_template('verification/unconfirmed_account.html')
