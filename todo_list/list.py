@@ -163,7 +163,11 @@ def upload_image():
     if form.validate_on_submit():
         img = form.image.data
         with Image.open(img) as imagen:
-            imagen = imagen.resize((320, 320))
+            x1, y1, x2, y2 = form.region.data.split('-')
+            y1 = 0
+            y2 = imagen.height
+            imagen = imagen.crop((int(x1), y1, int(x2), y2))
+            imagen = imagen.resize(size = (320, 320))
             filename = secure_filename(img.filename)
             imagen.save(os.path.join(
                 app.config['UPLOAD_FOLDER'], 'profiles', filename
