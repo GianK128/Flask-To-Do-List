@@ -1,7 +1,8 @@
 = TODO:
-- Agregar funcion de bloquear usuarios
 - Agregar autenticacion por mail
 - Agregar posibilidad de cambiar la contraseña
+- Agregar posibilidad de cambiar el mail
+- Agregar posibilidad de reiniciar la contraseña
 
 = QoL:
 - Burbuja de notificaciones en amigos (por solicitudes)
