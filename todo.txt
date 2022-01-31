@@ -1,5 +1,4 @@
 = TODO:
-- Agregar posibilidad de cambiar el mail
 - Agregar posibilidad de reiniciar la contraseña
 
 = FIXME:
