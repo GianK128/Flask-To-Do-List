@@ -17,16 +17,22 @@
     <nav>
         {% if current_user.is_authenticated %}
             <ul>
-                <li><a href="{{ url_for('routes.home') }}">Home</a></li>
+                <li><a href="{{ url_for('routes.home') }}">Inicio</a></li>
+                <li><a href="{{ url_for('list.my_lists', user=current_user.username) }}">Listas</a></li>
+                {% if current_user.email_confirmed %}
+                    <li><a href="{{ url_for('friends.friend_list', username=current_user.username) }}">Amigos</a></li>
+                {% else %}
+                    <li>Amigos</li>
+                    <li><a href="{{ url_for('auth.unconfirmed') }}">Verificar cuenta</a></li>
+                {% endif %}
                 <li><a href="{{ url_for('list.my_lists', user=current_user.username) }}">{{ current_user.username }}</a></li>
-                <li><a href="{{ url_for('friends.friend_list', username=current_user.username) }}">Friends</a></li>
-                <li><a href="{{ url_for('auth.logout') }}">Log out</a></li>
+                <li><a href="{{ url_for('auth.logout') }}">Cerrar sesion</a></li>
             </ul>
         {% else %}
             <ul>
-                <li><a href="{{ url_for('routes.home') }}">Home</a></li>
-                <li><a href="{{ url_for('auth.sign_up') }}">Sign Up</a></li>
-                <li><a href="{{ url_for('auth.login') }}">Log in</a></li>
+                <li><a href="{{ url_for('routes.home') }}">Inicio</a></li>
+                <li><a href="{{ url_for('auth.sign_up') }}">Registrarse</a></li>
+                <li><a href="{{ url_for('auth.login') }}">Ingresar</a></li>
             </ul>
         {% endif %}
     </nav>

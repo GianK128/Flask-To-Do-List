@@ -57,7 +57,7 @@ def resend_email():
     send_email(current_user.email, "[To Do List] Confirmación de su cuenta", html)
     return {}
 
-@auth.route('confirm')
+@auth.route('verify/confirm')
 @login_required
 def confirm_email():
     try:
@@ -78,7 +78,7 @@ def confirm_email():
         flash('Esta cuenta ya está confirmada. Por favor ingrese.', 'success')
     return redirect(url_for('routes.home'))
 
-@auth.route('unconfirmed')
+@auth.route('verify/unconfirmed')
 @login_required
 def unconfirmed():
     if current_user.email_confirmed:
