@@ -1,6 +1,6 @@
 from flask import Blueprint, flash, render_template, redirect, url_for, request
 from flask_login import current_user, login_required
-from todo_list import email
+from todo_list import db
 from todo_list.token import gen_confirm_token, confirm_token
 from todo_list.email import send_email
 from todo_list.forms import ChangePasswordForm, ChangeEmailForm
@@ -62,6 +62,8 @@ def change_password():
     user = User.query.filter_by(username = username).first_or_404()
 
     if user:
+        user.password = new_password
+        db.session.commit()
         return render_template('change_password.html', password=new_password)
     
     flash('El usuario al que se intenta acceder no existe.', 'warning')
@@ -79,6 +81,8 @@ def change_email_address():
     user = User.query.filter_by(username = username).first_or_404()
 
     if user:
+        user.email = new_email
+        db.session.commit()
         return render_template('change_email.html', email=new_email)
     
     flash('El usuario al que se intenta acceder no existe.', 'warning')
