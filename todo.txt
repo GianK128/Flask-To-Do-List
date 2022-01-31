@@ -8,7 +8,6 @@
 - Mejorar rutas de JS fetch
 
 = QoL:
-- Permitir verificar mail en otro momento que no sea el registro
 - Burbuja de notificaciones en amigos (por solicitudes)
 - Ver en el perfil de una persona si es tu amigo
 - Ver en la busqueda si ya es tu amigo
