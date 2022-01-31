@@ -28,6 +28,8 @@ class User(db.Model, UserMixin):
     email_confirmed = db.Column(db.Boolean(), default=False)
     email_confirmed_on = db.Column(db.DateTime(timezone=True))
     
+    active_token = db.Column(db.String(200))
+
     lists = db.relationship('List', backref='user', lazy=True, cascade="all, delete")
     friends = db.relationship('User',
         secondary = friends_table,
