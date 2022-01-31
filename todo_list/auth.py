@@ -44,8 +44,8 @@ def login():
             flash("El usuario o la contraseña son incorrectos.", category='danger')
     return render_template('login.html', form=form)
 
-@login_required
 @auth.route('verify/send-email')
+@login_required
 def resend_email():
     token = gen_confirm_token(current_user.email)
     url = url_for('auth.confirm_email', token=token, _external=True)
@@ -57,8 +57,8 @@ def resend_email():
     send_email(current_user.email, "[To Do List] Confirmación de su cuenta", html)
     return {}
 
-@login_required
 @auth.route('confirm')
+@login_required
 def confirm_email():
     try:
         email = confirm_token(request.args.get('token'))
@@ -78,16 +78,15 @@ def confirm_email():
         flash('Esta cuenta ya está confirmada. Por favor ingrese.', 'success')
     return redirect(url_for('routes.home'))
 
-@login_required
 @auth.route('unconfirmed')
+@login_required
 def unconfirmed():
     if current_user.email_confirmed:
         return redirect(url_for('routes.home'))
-    flash('Por favor verifique su cuenta', 'danger')
     return render_template('verification/unconfirmed_account.html')
 
-@login_required
 @auth.route('logout')
+@login_required
 def logout():
     logout_user()
     flash("Te desconectaste del sitio.", category='info')
