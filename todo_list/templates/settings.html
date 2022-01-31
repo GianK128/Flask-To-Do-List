@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Configuración - To Do List
+{% endblock title %}
+
+{% block content %}
+    <h1>Configuración</h1>
+    {% if current_user.email_confirmed %}
+        <h2>Cambiar contraseña</h2>
+        
+        {% if open_modal == 'password_mail' %}
+            <section>
+                <p>Mail modal activado.</p>
+            </section>
+        {% endif %}
+
+        <form method="POST">
+            {{ password_form.hidden_tag() }}
+            {{ password_form.old_password.label() }}
+            {{ password_form.old_password() }}
+            {{ password_form.new_password.label() }}
+            {{ password_form.new_password() }}
+            {{ password_form.confirm_new_password.label() }}
+            {{ password_form.confirm_new_password() }}
+            {{ password_form.submit() }}
+        </form>
+    {% else %}
+        <h2>Verificar cuenta</h2>
+        <p>Debe verificar su cuenta para acceder a todas las configuraciones.</p>
+        <a href="{{ url_for('auth.unconfirmed') }}">Verificar correo</a>
+    {% endif %}
+{% endblock content %}
