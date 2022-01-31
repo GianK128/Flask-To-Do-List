@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Cambio de contraseña - To Do List
+{% endblock title %}
+
+{% block content %}
+    <h1>Cambio de dirección de correo exitoso.</h1>
+    <p>La contraseña fue cambiada exitosamente. {{email}}</p>
+    <a href="{{ url_for('routes.home') }}">Volver al inicio</a>
+{% endblock content %}

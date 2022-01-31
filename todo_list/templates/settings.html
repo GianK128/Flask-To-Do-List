@@ -6,6 +6,17 @@
 
 {% block content %}
     <h1>Configuración</h1>
+
+    <h2>Cambiar direccion de correo</h2>
+    <form method="POST">
+        {{ email_form.hidden_tag() }}
+        {{ email_form.new_email.label() }}
+        {{ email_form.new_email() }}
+        {{ email_form.password.label() }}
+        {{ email_form.password() }}
+        {{ email_form.submit() }}
+    </form>
+
     {% if current_user.email_confirmed %}
         <h2>Cambiar contraseña</h2>
         
