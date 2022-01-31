@@ -1,18 +1,18 @@
 from itsdangerous import URLSafeTimedSerializer
 from todo_list import app
 
-def gen_confirm_token(email):
+def gen_confirm_token(text):
     serializer = URLSafeTimedSerializer(app.config['SECRET_KEY'])
-    return serializer.dumps(email, salt=app.config['SECURITY_PASSWORD_SALT'])
+    return serializer.dumps(text, salt=app.config['SECURITY_PASSWORD_SALT'])
 
 def confirm_token(token, expiration=1800):
     serializer = URLSafeTimedSerializer(app.config['SECRET_KEY'])
     try:
-        email = serializer.loads(
+        text = serializer.loads(
             token,
             salt = app.config['SECURITY_PASSWORD_SALT'],
             max_age = expiration
         )
-        return email
+        return text
     except:
         return False
