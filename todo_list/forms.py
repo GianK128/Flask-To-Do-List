@@ -69,3 +69,9 @@ class ProfilePicForm(FlaskForm):
     image = FileField("Elegir una imagen", validators=[FileRequired(), FileAllowed(['jpg', 'png', 'jpeg'], 'Solo se permiten imagenes (jpg, png).')])
     region = StringField(validators=[DataRequired()])
     submit = SubmitField("Subir imagen")
+
+class ChangePasswordForm(FlaskForm):
+    old_password = PasswordField("Contraseña actual", validators=[DataRequired()])
+    new_password = PasswordField("Contraseña nueva", validators=[DataRequired()])
+    confirm_new_password = PasswordField("Confirmar contraseña nueva", validators=[DataRequired(), EqualTo('new_password')])
+    submit = SubmitField("Cambiar contraseña")
