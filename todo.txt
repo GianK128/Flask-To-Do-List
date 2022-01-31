@@ -1,5 +1,4 @@
 = TODO:
-- Agregar posibilidad de cambiar la contraseña
 - Agregar posibilidad de cambiar el mail
 - Agregar posibilidad de reiniciar la contraseña
 
@@ -10,5 +9,6 @@
 = QoL:
 - Burbuja de notificaciones en amigos (por solicitudes)
 - Ver en el perfil de una persona si es tu amigo
+- Botones de agregar amigo en perfil de otra persona
 - Ver en la busqueda si ya es tu amigo
 - Hacer CSS y JS
