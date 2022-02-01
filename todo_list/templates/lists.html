@@ -24,7 +24,7 @@
     {% if current_user == user %}
         <a href="{{ url_for('list.create') }}">Create new list</a>
     {% endif %}
-    {% if current_user.is_authenticated %}
+    {% if current_user.username == user.username %}
         <h2>Actualizar foto de perfil</h2>
         <div pic-preview></div>
         <form action="{{ url_for('list.upload_image') }}" method="POST" enctype="multipart/form-data">
