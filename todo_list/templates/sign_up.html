@@ -15,6 +15,7 @@
         {{ form.password(placeholder="Contraseña") }}
         {{ form.passwordconfirm.label() }}
         {{ form.passwordconfirm(placeholder="Confirmar Contraseña") }}
+        <p>¿Ya tiene una cuenta? <a href="{{ url_for('settings.forgot_password') }}">Iniciar sesion</a>.</p>
         {{ form.submit() }}
     </form>
 {% endblock content %}

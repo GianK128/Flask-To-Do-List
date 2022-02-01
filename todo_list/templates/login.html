@@ -11,6 +11,7 @@
         {{ form.username() }}
         {{ form.password.label() }}
         {{ form.password() }}
+        <a href="{{ url_for('settings.forgot_password') }}">¿Te olvidaste la contraseña?</a>
         {{ form.submit() }}
     </form>
 {% endblock content %}
