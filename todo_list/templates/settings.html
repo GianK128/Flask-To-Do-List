@@ -8,6 +8,13 @@
     <h1>Configuración</h1>
 
     <h2>Cambiar direccion de correo</h2>
+
+    {% if open_modal == 'mail_change' %}
+        <section>
+            <p>Mail modal direccion de correo.</p>
+        </section>
+    {% endif %}
+
     <form method="POST">
         {{ email_form.hidden_tag() }}
         {{ email_form.new_email.label() }}
@@ -22,7 +29,7 @@
         
         {% if open_modal == 'password_mail' %}
             <section>
-                <p>Mail modal activado.</p>
+                <p>Mail modal contraseña.</p>
             </section>
         {% endif %}
 
