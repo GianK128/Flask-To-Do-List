@@ -1,5 +1,5 @@
 = TODO:
-- Agregar posibilidad de reiniciar la contraseña
+- Hacer funcional el active_token de user
 
 = FIXME:
 - Agregar imagenes para anon
