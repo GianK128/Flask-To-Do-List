@@ -1,10 +1,6 @@
-= FIXME:
-- Agregar imagenes para anon
-- Mejorar rutas de JS fetch
-
 = QoL:
+- Hacer CSS y JS
 - Burbuja de notificaciones en amigos (por solicitudes)
 - Ver en el perfil de una persona si es tu amigo
 - Botones de agregar amigo en perfil de otra persona
 - Ver en la busqueda si ya es tu amigo
-- Hacer CSS y JS
