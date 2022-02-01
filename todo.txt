@@ -1,6 +1,3 @@
-= TODO:
-- Activar modal en cambio de mail
-
 = FIXME:
 - Agregar imagenes para anon
 - Mejorar rutas de JS fetch
