@@ -182,14 +182,11 @@ def upload_image():
             y1 = 0
             y2 = imagen.height
             imagen = imagen.crop((int(x1), y1, int(x2), y2))
-            imagen = imagen.resize(size = (320, 320))
+            imagen = imagen.resize(size = (600, 600))
 
             filename = secure_filename(img.filename)
             filename = filename.split('.')
-            if len(filename) != 2: 
-                flash('Nombre de archivo invalido', 'danger')
-                return redirect(url_for('list.my_lists', user=current_user.username))
-            filename[0] = current_user.username
+            filename = [current_user.username, filename[-1]]
             filename = '.'.join(filename)
 
             imagen.save(os.path.join(
