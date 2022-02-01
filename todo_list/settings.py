@@ -1,12 +1,27 @@
+import email
 from flask import Blueprint, flash, render_template, redirect, url_for, request
 from flask_login import current_user, login_required
 from todo_list import db
 from todo_list.token import gen_confirm_token, confirm_token
 from todo_list.email import send_email
-from todo_list.forms import ChangePasswordForm, ChangeEmailForm
+from todo_list.forms import ChangePasswordForm, ChangeEmailForm, ForgotPasswordForm, ResetPasswordForm
 from todo_list.models import User
 
 settings = Blueprint('settings', __name__)
+
+def send_confirmation_email_anon(url_endpoint, html_to_send, email_subject, email_address, url_fallback):
+    user = User.query.filter_by(email=email_address).first()
+    if user:
+        html = render_template(
+            html_to_send, 
+            username=user.username,
+            confirm_url=url_endpoint
+        )
+        send_email(user.email, email_subject, html)
+        return True
+    else:
+        flash("No hay un usuario registrado con ese nombre")
+        return redirect(url_fallback)
 
 def send_confirmation_email(url_endpoint, html_to_send, email_subject):
     html = render_template(
@@ -84,6 +99,45 @@ def change_email_address():
         user.email = new_email
         db.session.commit()
         return render_template('change_email.html', email=new_email)
+    
+    flash('El usuario al que se intenta acceder no existe.', 'warning')
+    return redirect(url_for('routes.home'))
+
+@settings.route('forgot-password', methods=['GET', 'POST'])
+def forgot_password():
+    form = ForgotPasswordForm()
+    if form.validate_on_submit():
+        email_token = gen_confirm_token(form.email.data)
+        if send_confirmation_email_anon(
+            url_endpoint = url_for('settings.reset_password', m = email_token, _external = True),
+            html_to_send = 'verification/reset_password.html',
+            email_subject = '[To Do List] Reinicio de contraseña',
+            email_address = form.email.data,
+            url_fallback = url_for('settings.forgot_password')
+        ) is True:
+            flash('Chequee su correo electrónico para completar el proceso', 'info')
+            return redirect(url_for('routes.home'))
+    return render_template('forgot_password.html', form=form)
+
+@settings.route('reset-password', methods=['GET', 'POST'])
+def reset_password():
+    form = ResetPasswordForm()
+
+    try:
+        email = confirm_token(request.args.get('m'))
+    except:
+        flash('El link de confirmación es invalido o expiró. Intente nuevamente.', 'danger')
+        return redirect(url_for('routes.home'))
+
+    user = User.query.filter_by(email=email).first_or_404()
+
+    if form.validate_on_submit():
+        user.password = form.password.data
+        db.session.commit()
+        return redirect(url_for('auth.login'))
+
+    if user:
+        return render_template('reset_password.html', form=form)
     
     flash('El usuario al que se intenta acceder no existe.', 'warning')
     return redirect(url_for('routes.home'))
