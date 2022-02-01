@@ -1,5 +1,5 @@
 = TODO:
-- Hacer funcional el active_token de user
+- Activar modal en cambio de mail
 
 = FIXME:
 - Agregar imagenes para anon
