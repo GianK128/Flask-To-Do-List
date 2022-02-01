@@ -46,6 +46,8 @@ def main():
                 html_to_send = 'verification/change_password.html',
                 email_subject = '[To Do List] Cambio de contraseña'
             )
+            current_user.active_token = password_token
+            db.session.commit()
             return redirect(url_for('settings.main', openModal='password_mail'))
         else:
             flash('La contraseña que ingresó es incorrecta', 'danger')
@@ -59,6 +61,8 @@ def main():
                 html_to_send = 'verification/change_email.html',
                 email_subject = '[To Do List] Cambio de dirección de correo'
             )
+            current_user.active_token = email_token
+            db.session.commit()
             return redirect(url_for('settings.main', openModal='mail_change'))
         else:
             flash('La contraseña que ingresó es incorrecta', 'danger')
@@ -77,7 +81,11 @@ def change_password():
     user = User.query.filter_by(username = username).first_or_404()
 
     if user:
+        if request.args.get('token') != user.active_token:
+            flash('El link de confirmación es invalido o expiró. Intente nuevamente.', 'danger')
+            return redirect(url_for('routes.home'))
         user.password = new_password
+        user.active_token = ""
         db.session.commit()
         return render_template('change_password.html', password=new_password)
     
@@ -96,7 +104,11 @@ def change_email_address():
     user = User.query.filter_by(username = username).first_or_404()
 
     if user:
+        if request.args.get('m') != user.active_token:
+            flash('El link de confirmación es invalido o expiró. Intente nuevamente.', 'danger')
+            return redirect(url_for('routes.home'))
         user.email = new_email
+        user.active_token = ""
         db.session.commit()
         return render_template('change_email.html', email=new_email)
     
@@ -108,6 +120,7 @@ def forgot_password():
     form = ForgotPasswordForm()
     if form.validate_on_submit():
         email_token = gen_confirm_token(form.email.data)
+        user = User.query.filter_by(email=form.email.data).first()
         if send_confirmation_email_anon(
             url_endpoint = url_for('settings.reset_password', m = email_token, _external = True),
             html_to_send = 'verification/reset_password.html',
@@ -115,6 +128,8 @@ def forgot_password():
             email_address = form.email.data,
             url_fallback = url_for('settings.forgot_password')
         ) is True:
+            user.active_token = email_token
+            db.session.commit()
             flash('Chequee su correo electrónico para completar el proceso', 'info')
             return redirect(url_for('routes.home'))
     return render_template('forgot_password.html', form=form)
@@ -137,6 +152,11 @@ def reset_password():
         return redirect(url_for('auth.login'))
 
     if user:
+        if request.args.get('m') != user.active_token:
+            flash('El link de confirmación es invalido o expiró. Intente nuevamente.', 'danger')
+            return redirect(url_for('routes.home'))
+        user.active_token = ""
+        db.session.commit()
         return render_template('reset_password.html', form=form)
     
     flash('El usuario al que se intenta acceder no existe.', 'warning')

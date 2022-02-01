@@ -55,12 +55,17 @@ def resend_email():
         confirm_url=url
     )
     send_email(current_user.email, "[To Do List] Confirmación de su cuenta", html)
+    current_user.active_token = token
+    db.session.commit()
     return {}
 
 @auth.route('verify/confirm')
 @login_required
 def confirm_email():
     try:
+        if request.args.get('token') != current_user.active_token:
+            flash('El link de confirmación es invalido o expiró. Intente nuevamente.', 'danger')
+            return redirect(url_for('routes.home'))
         email = confirm_token(request.args.get('token'))
     except:
         flash('El link de confirmación es invalido o expiró. Intente nuevamente.', 'danger')
