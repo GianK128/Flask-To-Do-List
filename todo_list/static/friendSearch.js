@@ -4,7 +4,7 @@ const userSearchList = document.getElementById('userSearchList');
 function AddFriend(event, friendName) {
     var target = event.target;
 
-    fetch(`http://127.0.0.1:5000/friends/add?user=${friendName}`)
+    fetch(`./add?user=${friendName}`)
     .then(response => {
         if (response.status === 200) {
             target.parentNode.insertAdjacentHTML('beforeend', '¡Solicitud enviada!');
@@ -16,7 +16,7 @@ function AddFriend(event, friendName) {
 function RequestAction(event, action, friendName) {
     var target = event.target;
     
-    fetch(`http://127.0.0.1:5000/friends/request?action=${action}&to_user=${friendName}`)
+    fetch(`./request?action=${action}&to_user=${friendName}`)
     .then(response => {
         if (response.status === 200) {
             parent = target.parentNode;
@@ -35,7 +35,7 @@ userSearchBar.addEventListener('input', (e) => {
         userSearchList.innerHTML = '';
         userSearchList.insertAdjacentHTML('afterbegin', '<li>No se ha buscado nada todavía</li>');
     } else {
-        fetch(`http://127.0.0.1:5000/friends/search-user?user=${e.target.value}`)
+        fetch(`./search-user?user=${e.target.value}`)
             .then(response => response.json())
             .then(data => {
                 userSearchList.innerHTML = '';
@@ -45,7 +45,7 @@ userSearchBar.addEventListener('input', (e) => {
                     data.forEach(user => {
                         var relationStatus = user[1] ? '¡Solicitud enviada!' : `<button onclick="AddFriend(event, '${user[0]}');">Agregar</a></li>`;
                         userSearchList.insertAdjacentHTML('afterbegin', 
-                            `<li><a href="http://127.0.0.1:5000/${user[0]}">${user[0]}</a> ${relationStatus}`);
+                            `<li><a href="../${user[0]}">${user[0]}</a> ${relationStatus}`);
                     });
                 }
             });
