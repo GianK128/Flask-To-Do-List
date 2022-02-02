@@ -1,3 +1,12 @@
+= TODO:
+- Terminar nav y sus animaciones
+- CSS Inicio
+- CSS Amigos
+- CSS Perfil / Listas
+- CSS Items
+- JS Modal PFP
+- JS Modal Mail y Contraseña
+
 = QoL:
 - Hacer CSS y JS
 - Burbuja de notificaciones en amigos (por solicitudes)
