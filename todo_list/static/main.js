@@ -22,7 +22,13 @@ darkModeToggle.addEventListener('click', () => {
 
     if (theme) {
         localStorage.setItem('preferred-theme', 'dark');
+        if (darkModeText) {
+            darkModeText.textContent = 'Modo claro';
+        }
     } else {
         localStorage.setItem('preferred-theme', 'light');
+        if (darkModeText) {
+            darkModeText.textContent = 'Modo oscuro';
+        }
     }
 })

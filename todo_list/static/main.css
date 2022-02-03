@@ -23,7 +23,7 @@
 }
 body[dark-mode] {
     --clr-background:#191919;
-    --clr-sidebar: #252525;
+    --clr-sidebar: #1f1f1f;
     --clr-sidebar-li: #ccc;
     --clr-sidebar-highlight: #353535;
     --clr-main-text: #eee;
@@ -85,6 +85,7 @@ ion-icon {
     border-radius: 0 10px 10px 0;
     box-shadow: 0 0 10px #0007;
     overflow-x: hidden;
+    background-color: var(--clr-sidebar);
     transition: all .3s ease;
 }
 
@@ -261,6 +262,41 @@ ion-icon {
     color: var(--clr-sidebar-li);
 }
 
+.sidebar .dark-light-container {
+    width: 100%;
+    height: var(--sidebar-width);
+    background-color: var(--clr-sidebar);
+}
+
+.sidebar .dark-light-toggle ion-icon {
+    min-width: 2em;
+    min-height: 2em;
+    color: var(--clr-sidebar-li);
+}
+
+.sidebar .dark-light-toggle {
+    cursor: pointer;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0em;
+    padding: calc(var(--sidebar-width) * 0.25);
+    white-space: nowrap;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    border-radius: 0.5em;
+    color: var(--clr-sidebar-li);
+    background-color: var(--clr-sidebar);
+    transition: background-color .3s ease, gap .3s ease;
+}
+
+.sidebar .dark-light-toggle:hover {
+    background-color: var(--clr-sidebar-highlight);
+}
+
 .sidebar[open] {
     min-width: var(--sidebar-open-width);
     width: var(--sidebar-open-width);
@@ -284,7 +320,8 @@ ion-icon {
 
 .sidebar[open] .sidebar-nav li a,
 .sidebar[open] .sidebar-profile-user,
-.sidebar[open] .sidebar-header {
+.sidebar[open] .sidebar-header,
+.sidebar[open] .dark-light-toggle {
     gap: 1em;
 }
 
@@ -381,7 +418,7 @@ ion-icon {
     background-color: var(--clr-sidebar-highlight);
 }
 
-.dark-light-toggle ion-icon {
+.topbar .dark-light-toggle ion-icon {
     font-size: 2em;
 }
 

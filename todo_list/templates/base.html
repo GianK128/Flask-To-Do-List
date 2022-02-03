@@ -62,6 +62,13 @@
                         </a></li>
                     </ul>
             </nav>
+            <div class="dark-light-container">
+                <button class="flex dark-light-toggle" title="Toggle Dark Mode">
+                    <ion-icon class="dark" name="moon"></ion-icon>
+                    <ion-icon class="light" name="sunny"></ion-icon>
+                    <span id="dark-mode-text" class="sb-li-text">Modo oscuro</span>
+                </button>
+            </div>
             <div class="divider"></div>
             <div class="flex sidebar-profile">
                 <a class="sidebar-profile-user" href="{{ url_for('list.my_lists', user=current_user.username) }}">
@@ -118,9 +125,12 @@
     
     <script>
         let theme = localStorage.getItem('preferred-theme');
+        const darkModeText = document.getElementById('dark-mode-text');
 
         if (theme === "dark") {
             document.body.toggleAttribute('dark-mode');
+
+            if (darkModeText) darkModeText.textContent = 'Modo claro';
         }
     </script>
     <script src="{{ url_for('static', filename='main.js') }}"></script>
