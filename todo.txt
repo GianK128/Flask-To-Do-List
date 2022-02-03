@@ -1,11 +1,12 @@
 = TODO:
-- Terminar nav y sus animaciones
 - CSS Inicio
 - CSS Amigos
 - CSS Perfil / Listas
 - CSS Items
 - JS Modal PFP
 - JS Modal Mail y Contraseña
+
+- Agregar cambio a modo oscuro en nav registrado
 
 = QoL:
 - Hacer CSS y JS
