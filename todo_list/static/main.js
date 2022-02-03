@@ -1,0 +1,28 @@
+const sidebar = document.querySelector('.sidebar');
+const topbar = document.querySelector('.topbar');
+const menuBtn = document.getElementById('menuBtn');
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const darkModeToggle = document.querySelector('.dark-light-toggle');
+
+if (menuBtn) {
+    menuBtn.addEventListener('click', () => {
+        sidebar.toggleAttribute('open');
+    })
+}
+
+if (mobileMenuBtn) {
+    mobileMenuBtn.addEventListener('click', () => {
+        topbar.toggleAttribute('open');
+    })
+}
+
+darkModeToggle.addEventListener('click', () => {
+    document.body.toggleAttribute('dark-mode');
+    let theme = document.body.hasAttribute('dark-mode');
+
+    if (theme) {
+        localStorage.setItem('preferred-theme', 'dark');
+    } else {
+        localStorage.setItem('preferred-theme', 'light');
+    }
+})
