@@ -12,8 +12,40 @@
     {% if current_user.is_authenticated %}
         <h1>Inicio</h1>
         <h2>Acciones rápidas</h2>
-        <a href="{{ url_for('list.create') }}">Create List</a>
-        <a href="{{ url_for('list.my_lists', user = current_user.username) }}">See My Lists</a>
+        <div class="flex quick-card-container">
+            <a href="{{ url_for('list.create') }}">
+                <button class="flex flex-column quick-card">
+                    <div class="header" style="background-color: #459a56;">
+                        <ion-icon name="create"></ion-icon>
+                    </div>
+                    <div class="content">
+                        <h3>Crear Lista</h3>
+                        <div class="divider"></div>
+                        <p>Crear una lista y ponerle un nombre</p>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="decorator">
+                        <ion-icon name="arrow-forward"></ion-icon>
+                    </div>
+                </button>
+            </a>
+            <a href="{{ url_for('list.my_lists', user = current_user.username) }}">
+                <button class="flex flex-column quick-card">
+                    <div class="header" style="background-color: rgb(221, 178, 37);">
+                        <ion-icon name="person"></ion-icon>
+                    </div>
+                    <div class="content">
+                        <h3>Ver mis listas</h3>
+                        <div class="divider"></div>
+                        <p>Ir a tu perfil</p>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="decorator">
+                        <ion-icon name="arrow-forward"></ion-icon>
+                    </div>
+                </button>
+            </a>
+        </div>
 
         <h2>Actividad</h2>
         {% if days %}
