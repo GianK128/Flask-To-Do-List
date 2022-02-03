@@ -4,37 +4,51 @@
     Home - To Do List
 {% endblock title %}
 
+{% block head_content %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+{% endblock head_content %}
+    
 {% block content %}
     {% if current_user.is_authenticated %}
-        <h1>To Do List</h1>
-        <p>¿Qué va a hacer hoy?</p>
+        <h1>Inicio</h1>
+        <h2>Acciones rápidas</h2>
         <a href="{{ url_for('list.create') }}">Create List</a>
         <a href="{{ url_for('list.my_lists', user = current_user.username) }}">See My Lists</a>
 
         <h2>Actividad</h2>
-        {% if activities %}
-            {% for log in activities %}
-                {% if log.type == 1 %}
-                    <p>
-                        <a href="{{ url_for('list.my_lists', user=log.user.username) }}">{{ log.user.username }}</a> marcó "<a href="{{ url_for('list.user_list', user=log.user.username, listname=get_list_name(log.list_id)) }}">{{ get_item_name(log.item_id) }}</a>" como completado.
-                    </p>
-                {% elif log.type == 2 %}
-                    <p>
-                        <a href="{{ url_for('list.my_lists', user=log.user.username) }}">{{ log.user.username }}</a> completó todos sus objetivos en <a href="{{ url_for('list.user_list', user=log.user.username, listname=get_list_name(log.list_id)) }}">{{ get_list_name(log.list_id) }}</a>.
-                    </p>
-                {% elif log.type == 3 %}
-                    <p>
-                        <a href="{{ url_for('list.my_lists', user=log.user.username) }}">{{ log.user.username }}</a> ahora es amigo de <a href="{{ url_for('list.my_lists', user=get_username(log.friend_id)) }}">{{ get_username(log.friend_id) }}</a>.
-                    </p>
-                {% elif log.type == 4 %}
-                    <p>
-                        <a href="{{ url_for('list.my_lists', user=log.user.username) }}">{{ log.user.username }}</a> creó la lista <a href="{{ url_for('list.user_list', user=log.user.username, listname=get_list_name(log.list_id)) }}">{{ get_list_name(log.list_id) }}</a>.
-                    </p>
-                {% endif %}
+        {% if days %}
+            {% for day, log_list in days.items() %}
+                <p>
+                    {{ get_date_from_ordinal(day) }}
+                </p>
+                {% for log in log_list %}
+                    {% if log.type == 1 %}
+                        <p>
+                            <a href="{{ url_for('list.my_lists', user=log.user.username) }}">{{ log.user.username }}</a> marcó "<a href="{{ url_for('list.user_list', user=log.user.username, listname=get_list_name(log.list_id)) }}">{{ get_item_name(log.item_id) }}</a>" como completado.
+                            {{ log.date }}
+                        </p>
+                    {% elif log.type == 2 %}
+                        <p>
+                            <a href="{{ url_for('list.my_lists', user=log.user.username) }}">{{ log.user.username }}</a> completó todos sus objetivos en <a href="{{ url_for('list.user_list', user=log.user.username, listname=get_list_name(log.list_id)) }}">{{ get_list_name(log.list_id) }}</a>.
+                            {{ log.date }}
+                        </p>
+                    {% elif log.type == 3 %}
+                        <p>
+                            <a href="{{ url_for('list.my_lists', user=log.user.username) }}">{{ log.user.username }}</a> ahora es amigo de <a href="{{ url_for('list.my_lists', user=get_username(log.friend_id)) }}">{{ get_username(log.friend_id) }}</a>.
+                            {{ log.date }}
+                        </p>
+                    {% elif log.type == 4 %}
+                        <p>
+                            <a href="{{ url_for('list.my_lists', user=log.user.username) }}">{{ log.user.username }}</a> creó la lista <a href="{{ url_for('list.user_list', user=log.user.username, listname=get_list_name(log.list_id)) }}">{{ get_list_name(log.list_id) }}</a>.
+                            {{ log.date }}
+                        </p>
+                    {% endif %}
+                {% endfor %}
             {% endfor %}
         {% else %}
             <p>Aquí no hay nada aún.</p>
         {% endif %}
+            
     {% else %}
         <h1>Home Page</h1>
         <p>Bienvenido a To Do List</p>
