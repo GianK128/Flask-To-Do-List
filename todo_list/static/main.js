@@ -3,6 +3,13 @@ const topbar = document.querySelector('.topbar');
 const menuBtn = document.getElementById('menuBtn');
 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
 const darkModeToggle = document.querySelector('.dark-light-toggle');
+const closable = document.querySelectorAll('.close');
+
+closable.forEach(button => {
+    button.addEventListener('click', () => {
+        button.parentElement.remove()
+    })
+})
 
 if (menuBtn) {
     menuBtn.addEventListener('click', () => {

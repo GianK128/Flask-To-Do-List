@@ -11,7 +11,6 @@
     </title>
     {% block head_content %}
     {% endblock head_content %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='logo.ico') }}" type="image/x-icon">
     <script src="https://kit.fontawesome.com/30735d7de8.js" crossorigin="anonymous"></script>
 </head>
@@ -105,13 +104,14 @@
             </button>
         </header>
     {% endif %}
-    <main>
+    
+    <main class="flex">
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 {% for category, message in messages %}
                     <div class="alert alert-{{ category }}">
                         {{ message }}
-                        <button type="button" class="close" aria-label="Close alert">
+                        <button type="button" class="close" aria-label="Cerrar alerta">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
