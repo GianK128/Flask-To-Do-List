@@ -6,6 +6,7 @@ from flask_migrate import Migrate
 from flask_mail import Mail
 from os import environ
 from os.path import abspath, dirname, join
+import datetime
 
 DB_NAME = "usernotes.db"
 UPLOAD_FOLDER_PATH = join(abspath(dirname(__file__)), 'static', 'uploads')
@@ -58,8 +59,12 @@ def utility_processor():
     def get_username(user_id):
         return User.query.get(user_id).username
 
+    def get_date_from_ordinal(ordinal_date):
+        return datetime.date.fromordinal(ordinal_date)
+
     return dict(
         get_item_name = get_item_name,
         get_list_name = get_list_name,
-        get_username = get_username
+        get_username = get_username,
+        get_date_from_ordinal = get_date_from_ordinal
     )
