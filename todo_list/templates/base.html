@@ -19,8 +19,8 @@
     {% if current_user.is_authenticated %} 
         <div class="flex sidebar">
             <header class="flex sidebar-header">
-                <img src="{{ url_for('static', filename='media/logo-squared.png') }}" alt="Logo">
-                <div class="sidebar-header-text">
+                <img class="sb-icon-img" src="{{ url_for('static', filename='media/logo-squared.png') }}" alt="Logo">
+                <div class="sidebar-header-text sb-text-appear">
                     <span class="text-bold">ToDo</span><span class="text-light">List</span>
                 </div>
             </header>
@@ -33,47 +33,47 @@
             <div class="divider"></div>
             <nav class="sidebar-nav">
                     <ul>
-                        <li title="Inicio"><a href="{{ url_for('routes.home') }}">
+                        <li title="Inicio"><a class="sb-li" href="{{ url_for('routes.home') }}">
                             <ion-icon name="home"></ion-icon>
-                            <span class="sb-li-text">Inicio</span>
+                            <span class="sb-li-text sb-text-appear">Inicio</span>
                         </a></li>
-                        <li title="Listas"><a href="{{ url_for('list.my_lists', user=current_user.username) }}">
+                        <li title="Listas"><a class="sb-li" href="{{ url_for('list.my_lists', user=current_user.username) }}">
                             <ion-icon name="create"></ion-icon>
-                            <span class="sb-li-text">Listas</span>
+                            <span class="sb-li-text sb-text-appear">Listas</span>
                         </a></li>
                         {% if current_user.email_confirmed %}
-                            <li title="Amigos"><a href="{{ url_for('friends.friend_list', username=current_user.username) }}">
+                            <li title="Amigos"><a class="sb-li" href="{{ url_for('friends.friend_list', username=current_user.username) }}">
                                 <ion-icon name="people"></ion-icon>
-                                <span class="sb-li-text">Amigos</span>
+                                <span class="sb-li-text sb-text-appear">Amigos</span>
                             </a></li>
                         {% else %}
-                            <li title="Amigos">
-                                <ion-icon name="people"></ion-icon>
-                                <span class="sb-li-text">Amigos</span>
+                            <li class="sb-li disabled" title="Amigos">
+                                <ion-icon class="disabled" name="people"></ion-icon>
+                                <span class="sb-li-text sb-text-appear">Amigos</span>
                             </li title="Verificar cuenta">
-                            <li><a href="{{ url_for('auth.unconfirmed') }}">
+                            <li><a class="sb-li" href="{{ url_for('auth.unconfirmed') }}">
                                 <ion-icon name="checkmark-circle"></ion-icon>
-                                <span class="sb-li-text">Verificar cuenta</span>
+                                <span class="sb-li-text sb-text-appear">Verificar cuenta</span>
                             </a></li>
                         {% endif %}
-                        <li title="Configuración"><a href="{{ url_for('settings.main') }}">
+                        <li title="Configuración"><a class="sb-li" href="{{ url_for('settings.main') }}">
                             <ion-icon name="settings"></ion-icon>
-                            <span class="sb-li-text">Configuración</span>
+                            <span class="sb-li-text sb-text-appear">Configuración</span>
                         </a></li>
                     </ul>
             </nav>
             <div class="dark-light-container">
-                <button class="flex dark-light-toggle" title="Toggle Dark Mode">
+                <button class="flex sb-li dark-light-toggle" title="Toggle Dark Mode">
                     <ion-icon class="dark" name="moon"></ion-icon>
                     <ion-icon class="light" name="sunny"></ion-icon>
-                    <span id="dark-mode-text" class="sb-li-text">Modo oscuro</span>
+                    <span id="dark-mode-text" class="sb-li-text sb-text-appear">Modo oscuro</span>
                 </button>
             </div>
             <div class="divider"></div>
             <div class="flex sidebar-profile">
                 <a class="sidebar-profile-user" href="{{ url_for('list.my_lists', user=current_user.username) }}">
-                    <img src="{{ url_for('static', filename='uploads/profiles/{}'.format(current_user.pic_path)) }}" alt="Imagen de perfil">
-                    <span class="sb-user-text">{{ current_user.username }}</span>
+                    <img class="sb-icon-img" src="{{ url_for('static', filename='uploads/profiles/{}'.format(current_user.pic_path)) }}" alt="Imagen de perfil">
+                    <span class="sb-user-text sb-text-appear">{{ current_user.username }}</span>
                 </a>
                 <a class="sidebar-profile-logout" href="{{ url_for('auth.logout') }}">
                     <ion-icon name="log-out-outline"></ion-icon>
