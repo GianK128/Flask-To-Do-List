@@ -20,6 +20,8 @@
     --clr-sidebar-li: #030303;
     --clr-sidebar-highlight: #dedede;
     --clr-main-text: #111;
+    --clr-text-accent: #9237b6;
+    --clr-text-obscured: #999;
 
     --clr-disabled: #bababa;
     --clr-disabled-icon: #ededed;
@@ -30,6 +32,8 @@ body[dark-mode] {
     --clr-sidebar-li: #ccc;
     --clr-sidebar-highlight: #353535;
     --clr-main-text: #eee;
+    --clr-text-accent: #c659f1;
+    --clr-text-obscured: #777;
 
     --clr-disabled: #434343;
     --clr-disabled-icon: #757575;

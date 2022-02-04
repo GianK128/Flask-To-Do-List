@@ -49,34 +49,40 @@
 
         <h2>Actividad</h2>
         {% if days %}
-            {% for day, log_list in days.items() %}
-                <p>
-                    {{ get_date_from_ordinal(day) }}
-                </p>
-                {% for log in log_list %}
-                    {% if log.type == 1 %}
-                        <p>
-                            <a href="{{ url_for('list.my_lists', user=log.user.username) }}">{{ log.user.username }}</a> marcó "<a href="{{ url_for('list.user_list', user=log.user.username, listname=get_list_name(log.list_id)) }}">{{ get_item_name(log.item_id) }}</a>" como completado.
-                            {{ log.date }}
-                        </p>
-                    {% elif log.type == 2 %}
-                        <p>
-                            <a href="{{ url_for('list.my_lists', user=log.user.username) }}">{{ log.user.username }}</a> completó todos sus objetivos en <a href="{{ url_for('list.user_list', user=log.user.username, listname=get_list_name(log.list_id)) }}">{{ get_list_name(log.list_id) }}</a>.
-                            {{ log.date }}
-                        </p>
-                    {% elif log.type == 3 %}
-                        <p>
-                            <a href="{{ url_for('list.my_lists', user=log.user.username) }}">{{ log.user.username }}</a> ahora es amigo de <a href="{{ url_for('list.my_lists', user=get_username(log.friend_id)) }}">{{ get_username(log.friend_id) }}</a>.
-                            {{ log.date }}
-                        </p>
-                    {% elif log.type == 4 %}
-                        <p>
-                            <a href="{{ url_for('list.my_lists', user=log.user.username) }}">{{ log.user.username }}</a> creó la lista <a href="{{ url_for('list.user_list', user=log.user.username, listname=get_list_name(log.list_id)) }}">{{ get_list_name(log.list_id) }}</a>.
-                            {{ log.date }}
-                        </p>
-                    {% endif %}
+            <div class="feed-container">
+                {% for day, log_list in days.items() %}
+                    <h3 class="stroke-behind">
+                        <span>{{ get_date_from_ordinal(day).strftime('%d %b %Y') }}</span>
+                    </h3>
+                    {% for log in log_list %}
+                        <div class="log-container">
+                            <img class="log-user-image" src="{{ url_for('static', filename='uploads/profiles/{}'.format(log.user.pic_path)) }}" alt="{{ log.user.username }}">
+                            {% if log.type == 1 %}
+                                <p class="log-content">
+                                    <span class="text"><a href="{{ url_for('list.my_lists', user=log.user.username) }}">{{ log.user.username }}</a> marcó "<a href="{{ url_for('list.user_list', user=log.user.username, listname=get_list_name(log.list_id)) }}">{{ get_item_name(log.item_id) }}</a>" como completado.</span>
+                                    <span class="tag">{{ log.date.strftime('%H:%M') }}</span>
+                                </p>
+                            {% elif log.type == 2 %}
+                                <p class="log-content">
+                                    <span class="text"><a href="{{ url_for('list.my_lists', user=log.user.username) }}">{{ log.user.username }}</a> completó todos sus objetivos en <a href="{{ url_for('list.user_list', user=log.user.username, listname=get_list_name(log.list_id)) }}">{{ get_list_name(log.list_id) }}</a>.</span>
+                                    <span class="tag">{{ log.date.strftime('%H:%M') }}</span>
+                                </p class="log-content">
+                            {% elif log.type == 3 %}
+                                <p class="log-content">
+                                    <span class="text"><a href="{{ url_for('list.my_lists', user=log.user.username) }}">{{ log.user.username }}</a> ahora es amigo de <a href="{{ url_for('list.my_lists', user=get_username(log.friend_id)) }}">{{ get_username(log.friend_id) }}</a>.</span>
+                                    <span class="tag">{{ log.date.strftime('%H:%M') }}</span>
+                                </p class="log-content">
+                                <img class="log-user-image" src="{{ url_for('static', filename='uploads/profiles/{}'.format(get_pic_path_by_id(log.friend_id))) }}" alt="{{ get_username(log.friend_id) }}">
+                            {% elif log.type == 4 %}
+                                <p class="log-content">
+                                    <span class="text"><a href="{{ url_for('list.my_lists', user=log.user.username) }}">{{ log.user.username }}</a> creó la lista <a href="{{ url_for('list.user_list', user=log.user.username, listname=get_list_name(log.list_id)) }}">{{ get_list_name(log.list_id) }}</a>.</span>
+                                    <span class="tag">{{ log.date.strftime('%H:%M') }}</span>
+                                </p>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
                 {% endfor %}
-            {% endfor %}
+            </div>
         {% else %}
             <p>Aquí no hay nada aún.</p>
         {% endif %}
