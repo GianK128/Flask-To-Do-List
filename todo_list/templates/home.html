@@ -55,7 +55,7 @@
                         <span>{{ get_date_from_ordinal(day).strftime('%d %b %Y') }}</span>
                     </h3>
                     {% for log in log_list %}
-                        <div class="log-container">
+                        <div class="log-container {% if log.type == 1 %}type-item{% endif %}">
                             <img class="log-user-image" src="{{ url_for('static', filename='uploads/profiles/{}'.format(log.user.pic_path)) }}" alt="{{ log.user.username }}">
                             {% if log.type == 1 %}
                                 <p class="log-content">
