@@ -59,6 +59,9 @@ def utility_processor():
     def get_username(user_id):
         return User.query.get(user_id).username
 
+    def get_pic_path_by_id(user_id):
+        return User.query.get(user_id).pic_path
+
     def get_date_from_ordinal(ordinal_date):
         return datetime.date.fromordinal(ordinal_date)
 
@@ -66,5 +69,6 @@ def utility_processor():
         get_item_name = get_item_name,
         get_list_name = get_list_name,
         get_username = get_username,
-        get_date_from_ordinal = get_date_from_ordinal
+        get_date_from_ordinal = get_date_from_ordinal,
+        get_pic_path_by_id = get_pic_path_by_id
     )
