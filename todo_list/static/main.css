@@ -22,7 +22,9 @@
     --clr-main-text: #111;
     --clr-text-accent: #9237b6;
     --clr-text-obscured: #999;
+    --clr-shadow-highlight: #030303aa;
 
+    --clr-shadow: #03030377;
     --clr-disabled: #bababa;
     --clr-disabled-icon: #ededed;
 }
@@ -34,6 +36,7 @@ body[dark-mode] {
     --clr-main-text: #eee;
     --clr-text-accent: #c659f1;
     --clr-text-obscured: #777;
+    --clr-shadow-highlight: #9a9a9a77;
 
     --clr-disabled: #434343;
     --clr-disabled-icon: #757575;
@@ -57,6 +60,20 @@ ion-icon {
     color: var(--clr-sidebar-li);
 }
 
+/* BOTONES */
+.btn {
+    width: fit-content;
+    padding: 0.5em;
+    border-radius: 0.25em;
+    color: var(--clr-text-accent);
+    background-color: var(--clr-sidebar-highlight);
+}
+.btn:hover {
+    filter: brightness(80%);
+}
+body[dark-mode] .btn:hover {
+    filter: brightness(120%);
+}
 
 /* ALERTAS */
 

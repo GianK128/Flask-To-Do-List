@@ -1,11 +1,5 @@
 @import url(./main.css);
 
-:root {
-    --clr-shadow-highlight: #030303aa;
-}
-body[dark-mode] {
-    --clr-shadow-highlight: #9a9a9a77;
-}
 main {
     flex-direction: column;
 }
@@ -31,7 +25,7 @@ main h1 {
     border: none;
     outline: none;
     border-radius: 0.5em;
-    box-shadow: 0 0 10px #03030377;
+    box-shadow: 0 0 10px var(--clr-shadow);
     overflow: hidden;
     background-color: var(--clr-sidebar);
     transition: all .3s ease;
@@ -44,7 +38,7 @@ main h1 {
     width: 100%;
     height: 20%;
     padding: 0.5em 0.75em;
-    box-shadow: inset 1px -10px 10px -10px #03030377;
+    box-shadow: inset 1px -10px 10px -10px var(--clr-shadow);
 }
 
 .quick-card .header ion-icon {
