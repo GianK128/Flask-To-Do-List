@@ -23,6 +23,7 @@
     --clr-text-accent: #9237b6;
     --clr-text-obscured: #999;
     --clr-shadow-highlight: #030303aa;
+    --clr-completed: #29bd3d;
 
     --clr-shadow: #03030377;
     --clr-disabled: #bababa;
@@ -37,6 +38,7 @@ body[dark-mode] {
     --clr-text-accent: #c659f1;
     --clr-text-obscured: #777;
     --clr-shadow-highlight: #9a9a9a77;
+    --clr-completed: #1eac31;
 
     --clr-disabled: #434343;
     --clr-disabled-icon: #757575;

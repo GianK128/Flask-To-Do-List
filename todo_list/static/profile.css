@@ -1,0 +1,134 @@
+@import url(./main.css);
+
+main {
+    flex-direction: column;
+}
+
+.profile-header {
+    display: flex;
+    padding: 2em;
+}
+
+.profile-header img {
+    width: 12em;
+    border-radius: 50%;
+    border: 0.25em solid var(--clr-background);
+    outline: 0.25em solid var(--clr-sidebar-highlight);
+}
+
+.header-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+    padding: 2.5em;
+    gap: 0.5em;
+    white-space: nowrap;
+}
+
+.header-info a {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.header-info ion-icon {
+    font-size: 1.5em;
+    color: var(--clr-text-accent);
+}
+
+.lists-container {
+    flex-direction: column;
+    width: 75%;
+}
+
+.lists-container .list {
+    padding: 0.5em 0;
+}
+
+.lists-container .list .empty {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 0.5em 0;
+    padding: 0.5em;
+    border-radius: 0.25em;
+    color: var(--clr-disabled-icon);
+    background-color: var(--clr-disabled);
+}
+
+.lists-container .list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5em;
+    border-radius: 0.25em;
+    box-shadow: 0 0 10px var(--clr-shadow);
+    background-color: var(--clr-sidebar);
+    transition: all .3s ease;
+}
+
+.lists-container .list-item:hover {
+    box-shadow: 0 0 10px var(--clr-shadow-highlight);
+    transform: scale(105%);
+}
+
+
+.list-item .item-number {
+    border-right: 0.125em solid var(--clr-sidebar-highlight);
+    padding-right: 0.5em;
+    margin-right: 0.5em;
+    color: var(--clr-text-obscured);
+}
+
+.item-number.completed {
+    color: var(--clr-completed);
+}
+
+.list-item a {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    flex-grow: 1;
+    padding: 0.5em;
+    color: var(--clr-text-accent);
+}
+
+.list-item form {
+    position: relative;
+    padding: 0.5em;
+    border-radius: 0.25em;
+    transition: all .3s ease;
+}
+
+.list-item form:hover {
+    background-color: var(--clr-sidebar-highlight);
+}
+
+.list-item ion-icon {
+    font-size: 1.5em;
+}
+
+.list-item #submit {
+    cursor: pointer;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    transform: translate(-20%, -20%);
+}
+
+.modal {
+    border-radius: 0.5em;
+    overflow: hidden;
+    box-shadow: 0 0 10px var(--clr-shadow);
+    background-color: var(--clr-sidebar);
+}
+
+.modal-header {
+    padding: 0.25em 0.5em;
+    background-color: var(--clr-sidebar-highlight);
+}

@@ -38,7 +38,7 @@ class DeleteListForm(FlaskForm):
             raise ValidationError("No tienes permiso para realizar esta acción")
 
     id = StringField(validators=[DataRequired()])
-    submit = SubmitField(label='Borrar')
+    submit = SubmitField('')
 
 class AddItemForm(FlaskForm):
     def validate_list_id(self, list_id_to_check):
