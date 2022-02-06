@@ -90,6 +90,9 @@ def complete_item():
             current_user.activities.append(new_log)
         else:
             _log = ActivityLog.query.filter_by(item_id = _item.id).first()
+            if _item.list.completed:
+                _list_log = ActivityLog.query.filter_by(list_id = _item.list.id).first()
+                db.session.delete(_list_log)
             db.session.delete(_log)
         db.session.commit()
 
