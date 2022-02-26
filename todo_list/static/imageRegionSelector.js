@@ -79,6 +79,8 @@ function CreatePicPreview() {
       let newOffSet = clamp(e.clientX - mouseOffset, 0, maxOffset)
       e.target.style.left = `${newOffSet}px`
 
+      console.log(refX, refY, maxRefX, maxRefY);
+
       // Escribir valores para pasar al backend en un input
       let values = [
         ReglaDeTres(refX, maxRefX, newOffSet),
@@ -109,10 +111,13 @@ function CreatePicPreview() {
       let image = new Image();
       image.src = reader.result;
       image.onload = function () {
-        maxRefX = this.width
-        maxRefY = this.height
-        refX = preview.clientWidth
-        refY = preview.clientHeight
+        maxRefX = this.width;
+        maxRefY = this.height;
+
+        aImg.src = e.target.result; 
+
+        refX = preview.clientWidth;
+        refY = preview.clientHeight;
 
         let values = [
           ReglaDeTres(refX, maxRefX, selector.offsetLeft),
@@ -120,9 +125,7 @@ function CreatePicPreview() {
           ReglaDeTres(refX, maxRefX, selector.offsetLeft + selector.offsetWidth),
           ReglaDeTres(refY, maxRefY, selector.offsetTop + selector.clientHeight)
         ]
-        picCutValues.value = `${values.join('-')}`
-
-        aImg.src = e.target.result; 
+        picCutValues.value = `${values.join('-')}`;
       }
     }; 
   })(img);

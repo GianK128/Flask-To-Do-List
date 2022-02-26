@@ -2,7 +2,7 @@
     position: relative;
     display: flex;
     justify-content: center;
-    width: 100%;
+    height: 100%;
 }
 
 [pic-preview] img {
@@ -17,7 +17,6 @@
     height: 100%;
     aspect-ratio: 1;
     top: 0;
-    left: calc(100% * 0.25);
     border: 3px solid #000;
     background-color: hsl(0 0% 100% / 0.2);
 }
