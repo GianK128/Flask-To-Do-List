@@ -1,12 +1,13 @@
 [pic-preview] {
     position: relative;
-    width: 70vw;
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
 
 [pic-preview] img {
     display: block;
-    width: 100%;
-    aspect-ratio: 16/9;
+    max-height: 100%;
 }
 
 [pic-preview] .image-selector {

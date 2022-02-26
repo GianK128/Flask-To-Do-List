@@ -1,10 +1,41 @@
 const preview = document.querySelector('[pic-preview]');
 const picInput = document.querySelector('[pic-input]');
-const picCutValues = document.querySelector('[pic-cut]')
+const picWrapper = document.querySelector('.pic-preview-wrapper');
+const picHelp = document.querySelector('.pic-preview-help');
+const picCutValues = document.querySelector('[pic-cut]');
 
 const clamp = (num, min, max) => { return Math.min(Math.max(num, min), max) }
 
-picInput.addEventListener('change', (e) => {
+// IMAGE DRAG & DROP
+
+picWrapper.addEventListener('dragover', e => {
+  e.preventDefault();
+  picHelp.classList.add('drag-over');
+});
+
+['dragleave', 'dragend'].forEach(ev => {
+  picWrapper.addEventListener(ev , e => {
+    picHelp.classList.remove('drag-over');
+  });
+});
+
+picWrapper.addEventListener('drop', e => {
+  e.preventDefault();
+
+  if (e.dataTransfer.files.length) {
+    picInput.files = e.dataTransfer.files;
+    CreatePicPreview();
+  }
+});
+
+// IMAGE PREVIEW
+
+picInput.addEventListener('change', (e) => CreatePicPreview());
+
+function CreatePicPreview() {
+  // Borrar prompt de Drag&Drop
+  picHelp.remove();
+
   // Limpiar en caso de que haya otra imagen
   preview.innerHTML = "";
   picCutValues.value = "";
@@ -92,7 +123,7 @@ picInput.addEventListener('change', (e) => {
     }; 
   })(img);
   reader.readAsDataURL(file);
-});
+}
 
 function ReglaDeTres(currentMax, previousMax, currentValue) {
   return Math.floor((currentValue * previousMax) / currentMax);

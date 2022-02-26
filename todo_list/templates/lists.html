@@ -52,7 +52,13 @@
     {% if current_user.username == user.username %}
         <div class="profile-selector-container modal">
             <h2 class="modal-header">Actualizar foto de perfil</h2>
-            <div pic-preview></div>
+            <div class="pic-preview-wrapper">
+                <div class="pic-preview-help">
+                    <ion-icon class="icon" name="image"></ion-icon>
+                    <span class="text">Arrastre una imagen o haga click para seleccionar.</span>
+                </div>
+                <div pic-preview></div>
+            </div>
             <form action="{{ url_for('list.upload_image') }}" method="POST" enctype="multipart/form-data">
                 {{ picform.hidden_tag() }}
                 {{ picform.id(value=user.id, type="hidden") }}
