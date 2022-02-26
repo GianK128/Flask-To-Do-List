@@ -84,7 +84,11 @@
                 {% endfor %}
             </div>
         {% else %}
-            <p>Aquí no hay nada aún.</p>
+            <p class="no-activity">
+                Aquí no hay nada aún :(
+                <br><br>
+                Agrega algun <a href="{{ url_for('friends.friend_list', username=current_user.username) }}">amigo</a> o <a href="{{ url_for('list.my_lists', user=current_user.username) }}">crea una lista</a> para comenzar.
+            </p>
         {% endif %}
             
     {% else %}
