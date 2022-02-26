@@ -9,6 +9,19 @@ main h1 {
     margin-bottom: 0.25em;
 }
 
+a {
+    text-decoration: none;
+    color: var(--clr-text-accent);
+}
+
+.no-activity {
+    padding-top: 1em;
+}
+
+.no-activity a:hover {
+    text-decoration: underline;
+}
+
 /* CARTAS DE ACCION RAPIDA */
 
 .quick-card-container {
