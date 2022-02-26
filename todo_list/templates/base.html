@@ -12,7 +12,6 @@
     {% block head_content %}
     {% endblock head_content %}
     <link rel="shortcut icon" href="{{ url_for('static', filename='logo.ico') }}" type="image/x-icon">
-    <script src="https://kit.fontawesome.com/30735d7de8.js" crossorigin="anonymous"></script>
 </head>
 <body class="{% if current_user.is_authenticated %}flex{% else %}flex flex-column{% endif %}">
     {% if current_user.is_authenticated %} 
