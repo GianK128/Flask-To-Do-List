@@ -30,6 +30,10 @@ picWrapper.addEventListener('drop', e => {
 
 // IMAGE PREVIEW
 
+picHelp.addEventListener('click', e => {
+  picInput.click();
+});
+
 picInput.addEventListener('change', (e) => CreatePicPreview());
 
 function CreatePicPreview() {
