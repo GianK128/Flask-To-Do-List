@@ -10,8 +10,17 @@
 {% endblock head_content %}
 
 {% block content %}
-    <div class="profile-header">
-        <img src="{{ url_for('static', filename='/uploads/profiles/{}'.format(user.pic_path)) }}" alt="Profile Picture">
+    <section class="profile-header">
+        <div class="header-image">
+            <img src="{{ url_for('static', filename='/uploads/profiles/{}'.format(user.pic_path)) }}" alt="Profile Picture">
+            {% if current_user == user %}
+                <div class="edit btn-border">
+                    <button open-modal="modalProfilePic" class="btn btn-primary btn-circle">
+                        <ion-icon name="image"></ion-icon>
+                    </button>
+                </div>
+            {% endif %}
+        </div>
         <div class="header-info">
             <h1>{{ user.username }}</h1>
             {% if current_user == user %}
@@ -21,8 +30,8 @@
                 </a>
             {% endif %}
         </div>
-    </div>
-    <div class="lists-container">
+    </section>
+    <section class="lists-container">
         <h2>Listas</h2>
         <div class="list">
             {% if lists %}
@@ -48,26 +57,33 @@
                 <p class="empty">{{ user.username }} no tiene ninguna lista aún.</p>
             {% endif %}
         </div>
-    </div>
+    </section>
     {% if current_user.username == user.username %}
-        <div class="profile-selector-container modal">
-            <h2 class="modal-header">Actualizar foto de perfil</h2>
-            <div class="pic-preview-wrapper">
-                <div class="pic-preview-help">
-                    <ion-icon class="icon" name="image"></ion-icon>
-                    <span class="text">Arrastre una imagen o haga click para seleccionar.</span>
+        <section id="modalProfilePic" class="profile-selector-container modal">
+            <div class="modal-container">
+                <div class="modal-header">
+                    <h2>Actualizar foto de perfil</h2>
+                    <button type="button" class="close-modal" aria-label="Cerrar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div pic-preview></div>
+                <div class="pic-preview-wrapper">
+                    <div class="pic-preview-help">
+                        <ion-icon class="icon" name="image"></ion-icon>
+                        <span class="text">Arrastre una imagen o haga click para seleccionar.</span>
+                    </div>
+                    <div pic-preview></div>
+                </div>
+                <form action="{{ url_for('list.upload_image') }}" method="POST" enctype="multipart/form-data">
+                    <p class="pic-filename" data-label=""></p>
+                    {{ picform.hidden_tag() }}
+                    {{ picform.id(value=user.id, type="hidden") }}
+                    {{ picform.region(type="hidden", **{"pic-cut" : ""}) }}
+                    {{ picform.image(**{"pic-input" : ""}) }}
+                    {{ picform.submit(class="btn btn-primary") }}
+                </form>
             </div>
-            <form action="{{ url_for('list.upload_image') }}" method="POST" enctype="multipart/form-data">
-                <p class="pic-filename" data-label=""></p>
-                {{ picform.hidden_tag() }}
-                {{ picform.id(value=user.id, type="hidden") }}
-                {{ picform.region(type="hidden", **{"pic-cut" : ""}) }}
-                {{ picform.image(**{"pic-input" : ""}) }}
-                {{ picform.submit(class="btn btn-primary") }}
-            </form>
-        </div>
+        </section>
 
         <script src="{{ url_for('static', filename='imageRegionSelector.js') }}"></script>
     {% endif %} 

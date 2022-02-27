@@ -7,6 +7,7 @@ main {
 .profile-header {
     display: flex;
     padding: 2em;
+    gap: 1em;
 }
 
 .profile-header img {
@@ -14,6 +15,34 @@ main {
     border-radius: 50%;
     border: 0.25em solid var(--clr-background);
     outline: 0.25em solid var(--clr-sidebar-highlight);
+}
+
+.header-image {
+    position: relative;
+}
+
+.header-image .edit {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 0;
+    right: 0;
+    width: 3.8em;
+    aspect-ratio: 1 / 1;
+}
+
+.header-image .edit button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 4em;
+    aspect-ratio: 1 / 1;
+}
+
+.header-image .edit button ion-icon {
+    color: #fff;
+    font-size: 2em;
 }
 
 .header-info {
@@ -24,6 +53,10 @@ main {
     padding: 2.5em;
     gap: 0.5em;
     white-space: nowrap;
+}
+
+.header-info h1 {
+    font-size: 2em;
 }
 
 .header-info a {
@@ -122,18 +155,6 @@ main {
 }
 
 /* SELECTOR DE IMAGEN DE PERFIL */
-
-.modal {
-    border-radius: 0.5em;
-    overflow: hidden;
-    box-shadow: 0 0 10px var(--clr-shadow);
-    background-color: var(--clr-sidebar);
-}
-
-.modal-header {
-    padding: 0.25em 0.5em;
-    border-bottom: 1px solid var(--clr-sidebar-highlight);
-}
 
 .pic-preview-wrapper {
     position: relative;
