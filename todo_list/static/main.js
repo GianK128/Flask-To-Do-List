@@ -5,11 +5,15 @@ const mobileMenuBtn = document.getElementById('mobileMenuBtn');
 const darkModeToggle = document.querySelector('.dark-light-toggle');
 const closable = document.querySelectorAll('.close');
 
+// ALERTAS
+
 closable.forEach(button => {
     button.addEventListener('click', () => {
         button.parentElement.remove()
     })
 })
+
+// BOTONES DE MENU NAV
 
 if (menuBtn) {
     menuBtn.addEventListener('click', () => {
@@ -22,6 +26,8 @@ if (mobileMenuBtn) {
         topbar.toggleAttribute('open');
     })
 }
+
+// BOTON DE MODO OSCURO
 
 darkModeToggle.addEventListener('click', () => {
     document.body.toggleAttribute('dark-mode');
@@ -39,3 +45,17 @@ darkModeToggle.addEventListener('click', () => {
         }
     }
 })
+
+// MODALES
+
+document.querySelectorAll('[open-modal]').forEach(modalBtn => {
+    modalBtn.addEventListener('click', e => {
+        document.getElementById(e.target.getAttribute('open-modal')).setAttribute('open', true);
+    });
+});
+
+document.querySelectorAll('.close-modal').forEach(modalClose => {
+    modalClose.addEventListener('click', e => {
+        e.target.closest('.modal[open]').removeAttribute('open');
+    });
+});
