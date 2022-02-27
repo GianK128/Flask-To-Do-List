@@ -3,6 +3,7 @@ const picInput = document.querySelector('[pic-input]');
 const picWrapper = document.querySelector('.pic-preview-wrapper');
 const picHelp = document.querySelector('.pic-preview-help');
 const picCutValues = document.querySelector('[pic-cut]');
+const picFilename = document.querySelector('.pic-filename');
 
 const clamp = (num, min, max) => { return Math.min(Math.max(num, min), max) }
 
@@ -34,9 +35,14 @@ picHelp.addEventListener('click', e => {
   picInput.click();
 });
 
-picInput.addEventListener('change', (e) => CreatePicPreview());
+picInput.addEventListener('change', (e) => {
+  CreatePicPreview();
+});
 
 function CreatePicPreview() {
+  // Agregar nombre de archivo
+  picFilename.textContent = picInput.files[0].name;
+
   // Borrar prompt de Drag&Drop
   picHelp.remove();
 

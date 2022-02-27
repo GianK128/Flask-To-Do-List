@@ -15,7 +15,7 @@
         <div class="header-info">
             <h1>{{ user.username }}</h1>
             {% if current_user == user %}
-                <a class="btn btn-primary" href="{{ url_for('list.create') }}">
+                <a class="btn" href="{{ url_for('list.create') }}">
                     <ion-icon name="create"></ion-icon>
                     Crear lista nueva
                 </a>
@@ -60,11 +60,12 @@
                 <div pic-preview></div>
             </div>
             <form action="{{ url_for('list.upload_image') }}" method="POST" enctype="multipart/form-data">
+                <p class="pic-filename" data-label=""></p>
                 {{ picform.hidden_tag() }}
                 {{ picform.id(value=user.id, type="hidden") }}
                 {{ picform.region(type="hidden", **{"pic-cut" : ""}) }}
                 {{ picform.image(**{"pic-input" : ""}) }}
-                {{ picform.submit() }}
+                {{ picform.submit(class="btn btn-primary") }}
             </form>
         </div>
 

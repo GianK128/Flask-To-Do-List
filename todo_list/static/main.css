@@ -15,6 +15,11 @@
 
     --topbar-height: 4em;
 
+    --clr-main: #ca6fee;
+    --clr-mid-color: #b741d4;
+    --clr-mid-color-2: #c438b8;
+    --clr-highlight: #f06ee5;
+
     --clr-background:#f9f9f9;
     --clr-sidebar: #fff;
     --clr-sidebar-li: #030303;
@@ -64,14 +69,21 @@ ion-icon {
 
 /* BOTONES */
 .btn {
+    cursor: pointer;
     width: fit-content;
     padding: 0.5em;
+    border: none;
+    outline: none;
     border-radius: 0.25em;
     color: var(--clr-text-accent);
     background-color: var(--clr-sidebar-highlight);
 }
 .btn:hover {
     filter: brightness(80%);
+}
+.btn-primary {
+    color: #dedede;
+    background: linear-gradient(135deg, var(--clr-main), var(--clr-mid-color), var(--clr-highlight));
 }
 body[dark-mode] .btn:hover {
     filter: brightness(120%);

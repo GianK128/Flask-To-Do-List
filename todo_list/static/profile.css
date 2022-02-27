@@ -177,3 +177,23 @@ main {
 [pic-input] {
     display: none;
 }
+
+.profile-selector-container form {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    padding: 1em;
+    border-top: 1px solid var(--clr-sidebar-highlight);
+}
+
+.pic-filename {
+    width: 100%;
+    text-align: right;
+    padding: 0 1em;
+    color: var(--clr-text-accent);
+}
+
+.profile-selector-container form input[type="submit"] {
+    font-size: 1.1em;
+}
