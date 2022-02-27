@@ -20,6 +20,8 @@
     --clr-mid-color-2: #c438b8;
     --clr-highlight: #f06ee5;
 
+    --gradient-background: linear-gradient(135deg, var(--clr-main), var(--clr-mid-color), var(--clr-highlight));
+
     --clr-background:#f9f9f9;
     --clr-sidebar: #fff;
     --clr-sidebar-li: #030303;
@@ -83,14 +85,14 @@ ion-icon {
 }
 .btn-primary {
     color: #eee;
-    background: linear-gradient(135deg, var(--clr-main), var(--clr-mid-color), var(--clr-highlight));
+    background: var(--gradient-background);
 }
 .btn-circle {
     border-radius: 50%;
 }
 .btn-border {
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--clr-main), var(--clr-mid-color), var(--clr-highlight));
+    background: var(--gradient-background);
 }
 .btn-border button {
     border: 0.3em solid var(--clr-background);
@@ -320,6 +322,7 @@ body[dark-mode] .btn:hover {
     outline: none;
     border-radius: 0.8em;
     box-shadow: 0 0 10px #0005;
+    background: var(--gradient-background);
     transition: background-color .3s ease;
 }
 
@@ -343,7 +346,7 @@ body[dark-mode] .btn:hover {
     width: calc(var(--sidebar-width) * 0.3);
     height: 100%;
     border-radius: 0.25em;
-    background-color: #2b2b2b;
+    background-color: #eee;
     transition: all .3s ease;
 }
 
