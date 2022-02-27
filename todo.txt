@@ -2,7 +2,7 @@
 - CSS Inicio
 - CSS Amigos
 - CSS Items
-- CSS / JS Modal PFP
+- CSS Registro / Login
 - JS Modal Mail y Contraseña
 
 = QoL:
