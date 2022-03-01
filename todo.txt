@@ -1,6 +1,5 @@
 = TODO:
 - CSS Inicio
-- CSS Amigos
 - CSS Items
 - CSS Registro / Login
 - JS Modal Mail y Contraseña
