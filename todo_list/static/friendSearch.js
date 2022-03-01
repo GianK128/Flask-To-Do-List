@@ -7,7 +7,7 @@ function AddFriend(event, friendName) {
     fetch(`./add?user=${friendName}`)
     .then(response => {
         if (response.status === 200) {
-            target.parentNode.insertAdjacentHTML('beforeend', '¡Solicitud enviada!');
+            target.parentNode.insertAdjacentHTML('beforeend', '<span>Enviado.</span>');
             target.remove();
         }
     });
@@ -23,29 +23,34 @@ function RequestAction(event, action, friendName) {
             parent.lastElementChild.remove();
             parent.lastElementChild.remove();
             console.log()
-            relationStatus = action === 'accept' ? '¡Solicitud aceptada!' : 'Solicitud rechazada.'
+            relationStatus = action === 'accept' ? '<span class="accept">Aceptado.</span>' : '<span class="reject">Rechazado.</span>'
             parent.insertAdjacentHTML('beforeend', ` ${relationStatus}`);
         }
     });
 }
 
 userSearchBar.addEventListener('input', (e) => {
-    userSearchList.innerHTML = 'Actualizando...';
+    let liElement = document.createElement('li');
+    liElement.classList.add('no-search');
+    liElement.textContent = 'Actualizando...'; 
+    userSearchList.insertAdjacentElement('afterbegin', liElement);
     if (e.target.value === "") {
         userSearchList.innerHTML = '';
-        userSearchList.insertAdjacentHTML('afterbegin', '<li>No se ha buscado nada todavía</li>');
+        liElement.textContent = 'No se ha buscado nada todavía.'; 
+        userSearchList.insertAdjacentElement('afterbegin', liElement);
     } else {
         fetch(`./search-user?user=${e.target.value}`)
             .then(response => response.json())
             .then(data => {
                 userSearchList.innerHTML = '';
                 if (data.length === 0) {
-                    userSearchList.insertAdjacentHTML('afterbegin', `<li>Nothing found.</li>`);
+                    liElement.textContent = 'No se encontró nada.'
+                    userSearchList.insertAdjacentElement('afterbegin', liElement);
                 } else {
                     data.forEach(user => {
-                        var relationStatus = user[1] ? '¡Solicitud enviada!' : `<button onclick="AddFriend(event, '${user[0]}');">Agregar</a></li>`;
+                        var relationStatus = user[1] ? '<span>Enviado.</span>' : `<button onclick="AddFriend(event, '${user[0]}');">Agregar</a></li>`;
                         userSearchList.insertAdjacentHTML('afterbegin', 
-                            `<li><a href="../${user[0]}">${user[0]}</a> ${relationStatus}`);
+                            `<li class="search-result"><img src="${user[2]}" alt="Foto de perfil de ${user[0]}"><a href="../${user[0]}">${user[0]}</a> ${relationStatus}`);
                     });
                 }
             });

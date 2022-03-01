@@ -4,43 +4,86 @@
     {{ user }}'s friends - To Do List
 {% endblock title %}
 
+{% block head_content %}
+    <link rel="stylesheet" href="{{url_for('static', filename='friends.css')}}">
+{% endblock head_content %}
+
 {% block content %}
-    <h1>{{ user }}'s friend list</h1>
-    <h2>Friends: {{ friend_count }}</h2>
-
-    {% if friends %}
-        <ul>
-            {% for friend in friends %}
-                <li><a href="{{ url_for('list.my_lists', user=friend.username) }}">{{ friend.username }}</a></li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>{{ user }} no tiene amigos :(</p>
-    {% endif %}
-
-    {% if current_user.username == user %}
-        <h2>Solicitudes</h2>
-        {% if requests %}
-            <ul>
-                {% for request in requests %}
-                    <li>
-                        {{ request.username }}
-                        <button onclick="RequestAction(event, 'accept', '{{ request.username }}')">Aceptar</button>
-                        <button onclick="RequestAction(event, 'reject', '{{ request.username }}')">Rechazar</button>
-                    </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            No tienes solicitudes.
-        {% endif %}
-
-        <h2>Buscar usuarios</h2>
-        <input type="text" name="userSearch" id="userSearch">
-        <ul name="userSearchList" id="userSearchList">
-            <li>No se ha buscado nada todavía</li>
-        </ul>
-
-        <script src="{{ url_for('static', filename='friendSearch.js') }}"></script>
-    {% endif %}
+    <h2 class="username">{{ user }}</h2>
+    <h1>Lista de Amigos</h1>
+    <div class="friends-container">
+        <section class="friends-list">
+            <h2 class="title">Amigos ({{ friend_count }})</h2>
+            {% if friends %}
+                <ul class="friends-grid">
+                    {% for friend in friends %}
+                        <a href="{{ url_for('list.my_lists', user=friend.username) }}">
+                            <li>
+                                <img src="{{ url_for('static', filename='uploads/profiles/{}'.format(friend.pic_path)) }}" alt="Foto de perfil de {{ friend.username }}">
+                                <div class="info">
+                                    <span class="username">{{ friend.username }}</span>
+                                    <span>{{ get_length_of(friend.lists) }} lista{% if get_length_of(friend.lists) != 1 %}s{% endif %}</span>
+                                </div>
+                            </li>
+                        </a>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>{{ user }} no tiene amigos :(</p>
+            {% endif %}
+        </section>
+        {% if current_user.username == user %}
+            <aside open-tab="requests" class="friends-func tab-switcher">
+                <div class="requests">
+                    <div class="header">
+                        <h2>Solicitudes</h2>
+                        <div class="tab-group">
+                            <button for-tab="requests" class="tab active"><ion-icon name="person-add"></ion-icon></button>
+                            <button for-tab="search" class="tab"><ion-icon name="search"></ion-icon></button>
+                        </div>
+                    </div>
+                    <div class="body">
+                        {% if requests %}
+                            <ul>
+                                {% for request in requests %}
+                                    <li>
+                                        <img src="{{ url_for('static', filename='uploads/profiles/{}'.format(request.pic_path)) }}" alt="Foto de perfil de {{ request.username }}">
+                                        <a href="{{ url_for('list.my_lists', user=request.username) }}">{{ request.username }}</a>
+                                        <div class="actions">
+                                            <button class="accept" onclick="RequestAction(event, 'accept', '{{ request.username }}')"><ion-icon name="checkmark"></ion-icon></button>
+                                            <button class="reject" onclick="RequestAction(event, 'reject', '{{ request.username }}')"><ion-icon name="close"></ion-icon></button>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <p>No tienes solicitudes.</p>
+                        {% endif %}
+                    </div>
+                </div>
         
+                <div class="search">
+                    <div class="header">
+                        <h2>Buscar amigos</h2>
+                        <div class="tab-group">
+                            <button for-tab="requests" class="tab"><ion-icon name="person-add"></ion-icon></button>
+                            <button for-tab="search" class="tab active"><ion-icon name="search"></ion-icon></button>
+                        </div>
+                    </div>
+                    <div class="body">
+                        <div class="search-field">
+                            <input type="text" name="userSearch" id="userSearch" placeholder="Buscar...">
+                            <ion-icon name="search"></ion-icon>
+                        </div>
+                        <ul name="userSearchList" id="userSearchList">
+                            <li class="no-search">No se ha buscado nada todavía.</li>
+                        </ul>
+                    </div>
+                </div>
+        
+                <script src="{{ url_for('static', filename='friendTabs.js') }}"></script>
+                <script src="{{ url_for('static', filename='friendSearch.js') }}"></script>
+            </aside>
+        {% endif %}
+    </div>
 {% endblock content %}

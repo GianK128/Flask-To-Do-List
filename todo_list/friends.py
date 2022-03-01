@@ -17,7 +17,7 @@ def search_user():
         if friend in query: 
             query.remove(friend)
 
-    usernames = [[u.username, u in current_user.friend_requests] for u in query]
+    usernames = [[u.username, u in current_user.friend_requests, url_for('static', filename=f"uploads/profiles/{u.pic_path}")] for u in query]
     return jsonify(usernames)
 
 @friends.route('<username>')

@@ -75,11 +75,15 @@ def utility_processor():
         
         return f"{completed_items:02d}/{total_items:02d}"
 
+    def get_length_of(element):
+        return len(element)
+
     return dict(
         get_item_name = get_item_name,
         get_list_name = get_list_name,
         get_username = get_username,
         get_date_from_ordinal = get_date_from_ordinal,
         get_pic_path_by_id = get_pic_path_by_id,
-        get_completed_items_string = get_completed_items_string
+        get_completed_items_string = get_completed_items_string,
+        get_length_of = get_length_of
     )
