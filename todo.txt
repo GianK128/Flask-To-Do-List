@@ -2,8 +2,6 @@
 - CSS Inicio
 - CSS Items
 - CSS Registro / Login
-- CSS Configuración
-- JS Modal Mail y Contraseña
 
 = QoL:
 - Hacer CSS y JS
