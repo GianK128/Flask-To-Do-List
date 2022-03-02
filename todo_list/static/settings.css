@@ -1,0 +1,77 @@
+@import url(./main.css);
+
+main {
+    flex-direction: column;
+}
+
+h1 {
+    margin-bottom: 1em;
+}
+
+h2.user {
+    color: var(--clr-text-obscured);
+}
+
+.settings {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.setting-container {
+    width: 100%;
+}
+
+.setting-container h2 {
+    width: 100%;
+    padding: 0.25em;
+    border-bottom: 0.1em solid var(--clr-sidebar-highlight);
+}
+
+.setting-container p {
+    padding: 1em 0.25em;
+}
+
+.setting-container form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0.25em;
+    gap: 0.5em;
+}
+
+.setting-container form label {
+    color: var(--clr-text-obscured);
+}
+
+.setting-container form input[type="text"],
+.setting-container form input[type="password"],
+.setting-container form input[type="email"] {
+    width: 20em;
+    padding: 0.5em;
+    border: none;
+    outline: none;
+    border: 0.1em solid var(--clr-sidebar-highlight);
+    border-radius: 0.25em;
+    background-color: transparent;
+    color: var(--clr-main-text);
+    transition: all .3s ease;
+}
+
+.setting-container form input[type="text"]:focus,
+.setting-container form input[type="password"]:focus,
+.setting-container form input[type="email"]:focus,
+.setting-container form input[type="text"]:focus-visible,
+.setting-container form input[type="password"]:focus-visible,
+.setting-container form input[type="email"]:focus-visible {
+    border-color: var(--clr-main-text);
+}
+
+.setting-container form input[type="submit"] {
+    width: 20em;
+    padding: 0.5em;
+    border: none;
+    outline: none;
+    border-radius: 0.25em;
+    margin-top: 1em;
+}

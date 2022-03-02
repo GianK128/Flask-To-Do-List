@@ -78,6 +78,14 @@ def utility_processor():
     def get_length_of(element):
         return len(element)
 
+    def censor_email(email):
+        s = email.split('@')
+        s[0] = s[0][0] + "*" * len(s[0][0::])
+        s1 = s[1].split('.')
+        s1[0] = s1[0][0] + "*" * len(s1[0][0::])
+        s[1] = ".".join(s1)
+        return "@".join(s)
+
     return dict(
         get_item_name = get_item_name,
         get_list_name = get_list_name,
@@ -85,5 +93,6 @@ def utility_processor():
         get_date_from_ordinal = get_date_from_ordinal,
         get_pic_path_by_id = get_pic_path_by_id,
         get_completed_items_string = get_completed_items_string,
-        get_length_of = get_length_of
+        get_length_of = get_length_of,
+        censor_email = censor_email
     )

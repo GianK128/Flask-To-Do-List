@@ -218,6 +218,28 @@ body[dark-mode] .btn:hover {
     color: inherit;
 }
 
+.modal-body {
+    padding: 1em;
+}
+
+.modal .big-icon {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 30vh;
+}
+
+.modal .big-icon ion-icon {
+    font-size: 4.5em;
+    color: var(--clr-main);
+}
+
+.modal .big-icon p {
+    color: var(--clr-main);
+}
+
 /* UTILITIES ESTRUCTURAS */
 
 .flex {
