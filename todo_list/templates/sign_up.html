@@ -4,19 +4,35 @@
     Registrarse
 {% endblock title %}
 
+{% block head_content %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+{% endblock head_content %}
+    
 {% block content %}
-    <form method="POST">
-        {{ form.hidden_tag() }}
-        {{ form.username.label() }}
-        {{ form.username(placeholder="Usuario") }}
-        {{ form.email.label() }}
-        {{ form.email(placeholder="Correo Electrónico") }}
-        {{ form.password.label() }}
-        {{ form.password(placeholder="Contraseña") }}
-        {{ form.passwordconfirm.label() }}
-        {{ form.passwordconfirm(placeholder="Confirmar Contraseña") }}
-        <p>¿Ya tiene una cuenta? <a href="{{ url_for('settings.forgot_password') }}">Iniciar sesion</a>.</p>
-        {{ form.submit() }}
-    </form>
+    <div class="container">
+        <h1>Registrarse</h1>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div class="inputs">
+                {{ form.username.label() }}
+                {{ form.username() }}
+            </div>
+            <div class="inputs">
+                {{ form.email.label() }}
+                {{ form.email() }}
+            </div>
+            <div class="inputs">
+                {{ form.password.label() }}
+                {{ form.password() }}
+            </div>
+            <div class="inputs">
+                {{ form.passwordconfirm.label() }}
+                {{ form.passwordconfirm() }}
+            </div>
+            <div class="divider"></div>
+            <p>¿Ya tiene una cuenta? <a href="{{ url_for('settings.forgot_password') }}">Iniciar sesion</a>.</p>
+            {{ form.submit(class="btn btn-primary") }}
+        </form>
+    </div>
 {% endblock content %}
     

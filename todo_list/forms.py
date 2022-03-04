@@ -24,8 +24,8 @@ class RegisterForm(FlaskForm):
 
 class LoginForm(FlaskForm):
     username = StringField(label='Nombre de usuario', validators=[Length(2, 30), DataRequired()])
-    password = PasswordField(label='Contraseña:', validators=[Length(8, 60), DataRequired()])
-    submit = SubmitField(label='Entrar')
+    password = PasswordField(label='Contraseña', validators=[Length(8, 60), DataRequired()])
+    submit = SubmitField(label='Iniciar sesión')
 
 class CreateListForm(FlaskForm):
     name = StringField(label='Nombre de la Lista', validators=[Length(2), DataRequired()])
