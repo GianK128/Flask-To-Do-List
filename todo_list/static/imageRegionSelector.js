@@ -117,6 +117,10 @@ function CreatePicPreview() {
       let image = new Image();
       image.src = reader.result;
       image.onload = function () {
+        if (this.width < 600 || this.height < 600) {
+          alert("Por favor, ingrese una imagen de 600x600px como mínimo.");
+        }
+        
         maxRefX = this.width;
         maxRefY = this.height;
 
