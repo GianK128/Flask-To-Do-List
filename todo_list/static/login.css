@@ -63,11 +63,12 @@ main {
 }
 
 .container p.text {
-    padding: 1em 0.5em;
+    padding: 1em 0;
     margin: 1em 0;
 }
 
-.container a.btn {
+.container a.btn,
+.container button.btn {
     width: 100%;
     text-align: center;
 }

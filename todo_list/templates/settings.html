@@ -15,7 +15,7 @@
     <div class="settings">
         <section class="setting-container">
             <h2>Cambiar direccion de correo</h2>
-            <p>Se te enviará un correo de confimación a la dirección de correo nueva para confirmar el cambio de dirección.</p>
+            <p>Se te enviará un correo de confirmación a la dirección de correo nueva para confirmar el cambio de dirección.</p>
             <form method="POST">
                 {{ email_form.hidden_tag() }}
                 {{ email_form.new_email.label() }}
@@ -28,7 +28,7 @@
         {% if current_user.email_confirmed %}
             <section class="setting-container">
                 <h2>Cambiar contraseña</h2>
-                <p>Se te enviará un correo de confimación a tu correo electrónico para confirmar el cambio de contraseña.</p>
+                <p>Se te enviará un correo de confirmación a tu correo electrónico para confirmar el cambio de contraseña.</p>
                 <form method="POST">
                     {{ password_form.hidden_tag() }}
                     {{ password_form.old_password.label() }}
@@ -44,7 +44,7 @@
             <section class="setting-container">
                 <h2>Verificar cuenta</h2>
                 <p>Debe verificar su cuenta para acceder a todas las configuraciones.</p>
-                <a href="{{ url_for('auth.unconfirmed') }}">Verificar correo</a>
+                <a class="btn btn-primary" style="margin: 0.25em;" href="{{ url_for('auth.unconfirmed') }}">Verificar correo</a>
             </section>
         {% endif %}
     </div>

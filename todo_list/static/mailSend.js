@@ -4,7 +4,7 @@ let tmpCountDownInterval;
 
 sendBtn.addEventListener('click', (e) => {
     sendBtn.textContent = 'Enviando...';
-    fetch('./verify/send-email')
+    fetch('./send-email')
     .then(response => {
         if (response.status === 200) {
             sendBtn.disabled = true;

@@ -45,6 +45,11 @@ main {
 
 /* LISTA DE AMIGOS */
 
+.friends-list p {
+    color: var(--clr-text-obscured);
+    padding: 1em;
+}
+
 .friends-list ul {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(10em, 1fr));

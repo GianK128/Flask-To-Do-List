@@ -4,10 +4,16 @@
     Verificar cuenta
 {% endblock title %}
 
+{% block head_content %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+{% endblock head_content %}
+
 {% block content %}
-    <h1>Verificar cuenta</h1>
-    <p>Aun no ha verificado su correo electrónico.</p>
-    <button id='sendBtn'>Enviar correo</button>
+    <div class="container">
+        <h1>Verificar cuenta</h1>
+        <p class="text">Aun no ha verificado su correo electrónico.</p>
+        <button class="btn btn-primary" id='sendBtn'>Enviar correo</button>
+    </div>
 
     <script src="{{ url_for('static', filename='mailSend.js') }}"></script>
 {% endblock content %}
