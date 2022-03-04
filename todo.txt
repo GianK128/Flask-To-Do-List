@@ -1,6 +1,5 @@
 = TODO:
 - CSS Inicio
-- CSS Items
 - CSS Registro / Login
 
 = QoL:
@@ -9,3 +8,4 @@
 - Ver en el perfil de una persona si es tu amigo
 - Botones de agregar amigo en perfil de otra persona
 - Ver en la busqueda si ya es tu amigo
+- Hacer Logo para la página.
