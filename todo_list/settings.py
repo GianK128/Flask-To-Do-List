@@ -23,13 +23,13 @@ def send_confirmation_email_anon(url_endpoint, html_to_send, email_subject, emai
         flash("No hay un usuario registrado con ese nombre")
         return redirect(url_fallback)
 
-def send_confirmation_email(url_endpoint, html_to_send, email_subject):
+def send_confirmation_email(email_address, url_endpoint, html_to_send, email_subject):
     html = render_template(
         html_to_send, 
         username=current_user.username,
         confirm_url=url_endpoint
     )
-    send_email(current_user.email, email_subject, html)
+    send_email(email_address, email_subject, html)
 
 @settings.route('/', methods=['GET', 'POST'])
 @login_required
@@ -42,6 +42,7 @@ def main():
             password_token = gen_confirm_token(password_form.new_password.data)
             user_token = gen_confirm_token(current_user.username)
             send_confirmation_email(
+                email_address = current_user.email,
                 url_endpoint = url_for('settings.change_password', token = password_token, u = user_token, _external = True),
                 html_to_send = 'verification/change_password.html',
                 email_subject = '[To Do List] Cambio de contraseña'
@@ -57,6 +58,7 @@ def main():
             email_token = gen_confirm_token(email_form.new_email.data)
             user_token = gen_confirm_token(current_user.username)
             send_confirmation_email(
+                email_address = email_form.new_email.data,
                 url_endpoint = url_for('settings.change_email_address', m = email_token, u = user_token, _external = True),
                 html_to_send = 'verification/change_email.html',
                 email_subject = '[To Do List] Cambio de dirección de correo'
@@ -104,13 +106,17 @@ def change_email_address():
     user = User.query.filter_by(username = username).first_or_404()
 
     if user:
-        if request.args.get('m') != user.active_token:
-            flash('El link de confirmación es invalido o expiró. Intente nuevamente.', 'danger')
+        try:
+            if request.args.get('m') != user.active_token:
+                flash('El link de confirmación es invalido o expiró. Intente nuevamente.', 'danger')
+                return redirect(url_for('routes.home'))
+            user.email = new_email
+            user.active_token = ""
+            db.session.commit()
+            return render_template('change_email.html', email=new_email)
+        except:
+            flash("Esa dirección de correo ya está siendo utilizada por otra cuenta.", category='danger')
             return redirect(url_for('routes.home'))
-        user.email = new_email
-        user.active_token = ""
-        db.session.commit()
-        return render_template('change_email.html', email=new_email)
     
     flash('El usuario al que se intenta acceder no existe.', 'warning')
     return redirect(url_for('routes.home'))

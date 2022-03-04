@@ -74,7 +74,8 @@ def add_item():
         listname = List.query.filter_by(id=form.list_id.data).first().name
         return redirect(url_for('list.user_list', user=current_user.username, listname=listname))
     else:
-        return '<h1>WTF</h1>'
+        flash("La longitud de la nota debe ser de al menos 2 carácteres.", category='danger')
+        return redirect(url_for('list.user_list', user=current_user.username, listname=List.query.get(form.list_id.data).name))
 
 @list.route('list/edit-item', methods=['POST'])
 @login_required
