@@ -61,6 +61,15 @@ def add_item():
             list_id = form.list_id.data
         )
         db.session.add(new_item)
+
+        list_log = ActivityLog.query.filter(ActivityLog.type == 2).filter(ActivityLog.list_id == form.list_id.data).all()
+        for log in list_log:
+            db.session.delete(log)
+
+        _list = List.query.get(form.list_id.data)
+        if _list.completed:
+            _list.completed = False
+
         db.session.commit()
         listname = List.query.filter_by(id=form.list_id.data).first().name
         return redirect(url_for('list.user_list', user=current_user.username, listname=listname))
