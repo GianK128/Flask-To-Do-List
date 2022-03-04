@@ -1,6 +1,7 @@
 = TODO:
 - CSS Inicio
-- CSS Registro / Login
+- CSS Form Cambio de contraseña / mail
+- CSS Redirección Cambio de contraseña / mail
 
 = QoL:
 - Hacer CSS y JS
