@@ -59,3 +59,20 @@ document.querySelectorAll('.close-modal').forEach(modalClose => {
         e.target.closest('.modal[open]').removeAttribute('open');
     });
 });
+
+// INPUTS BONITOS
+
+document.querySelectorAll('form .inputs input').forEach(input => {
+    input.addEventListener('focus', e => {
+        let name = e.target.getAttribute('name');
+        document.querySelector(`label[for=${name}]`).classList.add('focus');
+        document.querySelector(`label[for=${name}]`).classList.add('current-focus');
+    });
+    input.addEventListener('focusout', e => {
+        let name = e.target.getAttribute('name');
+        if (e.target.value === "") {
+            document.querySelector(`label[for=${name}]`).classList.remove('focus');
+        }
+        document.querySelector(`label[for=${name}]`).classList.remove('current-focus');
+    });
+});

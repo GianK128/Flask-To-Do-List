@@ -4,39 +4,90 @@
     {{ user }} - {{ list.name }}
 {% endblock title %}
 
+{% block head_content %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='items.css')}}">
+{% endblock head_content %}
+
 {% block content %}
-    <h2>{{ user }}</h2>
+    <h2 class="user">{{ user }}</h2>
     <h1>{{ list.name }}</h1>
-    <p>{{ list.completed }}</p>
-    <ul>
-    {% for item in items %}
-        <li>[{{ item.date_written }}] {{ item.content }} Completado: {{ item.completed }}
+    <p>
+        {% if list.completed %}
+            <span class="completed">Completada ({{ get_completed_items_string(list) }})</span>
+        {% else %}
+            <span class="pending">Pendiente ({{ get_completed_items_string(list) }})</span>
+        {% endif %}
+    </p>
+    <section class="items-container">
+        <div class="header">
+            <h2>Contenido de la lista</h2>
             {% if current_user.username == user %}
-                <form action="{{ url_for('list.complete_item') }}" method="POST">
-                    {{ edit_form.hidden_tag() }}
-                    {{ edit_form.list_id(value=list.id, type="hidden") }}
-                    {{ edit_form.id(value=item.id, type='hidden') }}
-                    {{ edit_form.submit(value='Completar') }}
-                </form>
-                <form action="{{ url_for('list.delete_item') }}" method="POST">
-                    {{ edit_form.hidden_tag() }}
-                    {{ edit_form.list_id(value=list.id, type="hidden") }}
-                    {{ edit_form.id(value=item.id, type='hidden') }}
-                    {{ edit_form.submit(value='Borrar') }}
-                </form>
+                <button open-modal="modalAddItem" class="btn btn-primary"><ion-icon name="add"></ion-icon></button>
             {% endif %}
-        </li>
-    {% endfor %}
-    </ul>
+        </div>
+        <ul>
+        {% for item in items %}
+            <li>
+                <div class="content">
+                    <span class="time">{{ item.date_written.strftime("%d %b %Y %H:%M") }}</span>
+                    <span class="note {% if item.completed %}marked{% endif %}">{{ item.content }}</span>
+                    {% if item.completed %}
+                        <span class="completed">Completado</span>
+                    {% endif %} 
+                </div>
+                {% if current_user.username == user %}
+                    <div class="actions">
+                        <form action="{{ url_for('list.complete_item') }}" method="POST">
+                            {{ edit_form.hidden_tag() }}
+                            {{ edit_form.list_id(value=list.id, type="hidden") }}
+                            {{ edit_form.id(value=item.id, type='hidden') }}
+                            {{ edit_form.submit(value='', class="checkbox {}".format("marked" if item.completed else "")) }}
+                            <div class="icon">
+                                <div class="checkbox {% if item.completed %}marked{% endif %}"></div>
+                                {% if item.completed %}
+                                <div class="icon">
+                                    <ion-icon name="checkmark"></ion-icon>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </form>
+                        <form action="{{ url_for('list.delete_item') }}" method="POST">
+                            {{ edit_form.hidden_tag() }}
+                            {{ edit_form.list_id(value=list.id, type="hidden") }}
+                            {{ edit_form.id(value=item.id, type='hidden') }}
+                            {{ edit_form.submit(value='', class="erase") }}
+                            <div class="icon">
+                                <ion-icon name="trash"></ion-icon>
+                            </div>
+                        </form>
+                    </div>
+                {% endif %}
+            </li>
+        {% endfor %}
+        </ul>
+    </section>
     
     {% if current_user.username == user %}
-        <h2>Add Item</h2>    
-        <form action="{{ url_for('list.add_item') }}" method="POST">
-            {{ form.hidden_tag() }}
-            {{ form.list_id(value=list.id, type="hidden") }}
-            {{ form.content.label() }}
-            {{ form.content() }}
-            {{ form.submit() }}
-        </form>
+        <section id="modalAddItem" class="profile-selector-container modal">
+            <div class="modal-container">
+                <div class="modal-header">
+                    <h2>Agregar item a la lista</h2>
+                    <button type="button" class="close-modal" aria-label="Cerrar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body item-form">
+                    <form action="{{ url_for('list.add_item') }}" method="POST">
+                        <div class="inputs">
+                            {{ form.hidden_tag() }}
+                            {{ form.list_id(value=list.id, type="hidden") }}
+                            {{ form.content.label() }}
+                            {{ form.content() }}
+                        </div>
+                        {{ form.submit(class="btn btn-primary") }}
+                    </form>
+                </div>
+            </div>
+        </section> 
     {% endif %}
 {% endblock content %}

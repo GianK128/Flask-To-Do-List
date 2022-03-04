@@ -240,6 +240,50 @@ body[dark-mode] .btn:hover {
     color: var(--clr-main);
 }
 
+/* INPUTS BONITOS */
+
+form .inputs {
+    position: relative;
+    width: 100%;
+}
+
+form .inputs label {
+    cursor: text;
+    position: absolute;
+    top: 25%;
+    left: 2%;
+    color: var(--clr-text-obscured);
+    transition: all .3s ease;
+}
+
+form .inputs input {
+    border: none;
+    outline: none;
+    padding: 0.75em;
+    color: var(--clr-main-text);
+    background-color: transparent;
+    border-radius: 0.5em;
+    font-size: 1em;
+    border: 0.1em solid var(--clr-sidebar-highlight);
+    transition: all .4s ease;
+}
+
+form .inputs label.focus {
+    top: -25%;
+    left: 1%;
+    padding: 0 0.25em;
+    background-color: var(--clr-sidebar);
+}
+
+form .inputs label.current-focus {
+    color: var(--clr-main-text);
+}
+
+form .inputs input:focus,
+form .inputs input:focus-visible {
+    border-color: var(--clr-main-text);
+}
+
 /* UTILITIES ESTRUCTURAS */
 
 .flex {
