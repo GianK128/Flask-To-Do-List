@@ -181,8 +181,9 @@ a {
     position: relative;
 }
 
-.type-item~.type-item img {
-    outline: 3px solid var(--clr-sidebar-highlight);
+.type-item~.type-item img,
+.type-item img {
+    outline: 3px solid var(--clr-text-accent);
 }
 
 .type-item+.type-item::before {
@@ -190,7 +191,7 @@ a {
     position: absolute;
     width: 0.15em;
     height: 5em;
-    background-color: var(--clr-sidebar-highlight);
+    background-color: var(--clr-text-accent);
     z-index: -1;
     left: 1.5em;
     top: -50%;
