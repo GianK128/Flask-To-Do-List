@@ -4,8 +4,14 @@
     Cambio de dirección de correo electrónico
 {% endblock title %}
 
+{% block head_content %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+{% endblock head_content %}
+    
 {% block content %}
-    <h1>Cambio de dirección de correo exitoso.</h1>
-    <p>La direccion de correo fue cambiada exitosamente. {{email}}</p>
-    <a href="{{ url_for('routes.home') }}">Volver al inicio</a>
+    <div class="container">
+        <h1>Cambio de dirección de correo</h1>
+        <p class="text">La direccion de correo fue cambiada exitosamente.</p>
+        <a class="btn btn-primary" href="{{ url_for('routes.home') }}">Volver al inicio</a>
+    </div>
 {% endblock content %}

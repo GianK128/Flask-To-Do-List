@@ -4,13 +4,21 @@
     Crear una lista
 {% endblock title %}
 
+{% block head_content %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+{% endblock head_content %}
+    
 {% block content %}
-    <h1>Create a new list</h1>
-    <form method="POST">
-        {{ form.hidden_tag() }}
-        {{ form.name.label() }}
-        {{ form.name() }}
-        {{ form.submit() }}
-    </form>
+    <div class="container">
+        <h1>Crear una lista</h1>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div class="inputs">
+                {{ form.name.label() }}
+                {{ form.name() }}
+            </div>
+            {{ form.submit(class="btn btn-primary") }}
+        </form>
+    </div>
 {% endblock content %}
     

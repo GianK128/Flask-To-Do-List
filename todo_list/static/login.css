@@ -61,3 +61,13 @@ main {
     height: 2.5em;
     font-size: 1em;
 }
+
+.container p.text {
+    padding: 1em 0.5em;
+    margin: 1em 0;
+}
+
+.container a.btn {
+    width: 100%;
+    text-align: center;
+}

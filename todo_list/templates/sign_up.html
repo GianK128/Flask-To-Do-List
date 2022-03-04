@@ -30,7 +30,7 @@
                 {{ form.passwordconfirm() }}
             </div>
             <div class="divider"></div>
-            <p>¿Ya tiene una cuenta? <a href="{{ url_for('settings.forgot_password') }}">Iniciar sesion</a>.</p>
+            <p>¿Ya tiene una cuenta? <a href="{{ url_for('auth.login') }}">Iniciar sesion</a>.</p>
             {{ form.submit(class="btn btn-primary") }}
         </form>
     </div>
