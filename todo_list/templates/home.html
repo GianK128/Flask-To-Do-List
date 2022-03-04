@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Inicio - To Do List
+    To Do List
 {% endblock title %}
 
 {% block head_content %}
@@ -38,6 +38,22 @@
                         <h3>Ver mis listas</h3>
                         <div class="divider"></div>
                         <p>Ir a tu perfil</p>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="decorator">
+                        <ion-icon name="arrow-forward"></ion-icon>
+                    </div>
+                </button>
+            </a>
+            <a href="{{ url_for('friends.friend_list', username = current_user.username) }}">
+                <button class="flex flex-column quick-card">
+                    <div class="header" style="background-color: rgb(197, 45, 34);">
+                        <ion-icon name="people"></ion-icon>
+                    </div>
+                    <div class="content">
+                        <h3>Amigos</h3>
+                        <div class="divider"></div>
+                        <p>Buscar amigos o ver los tuyos.</p>
                     </div>
                     <div class="divider"></div>
                     <div class="decorator">
