@@ -90,6 +90,12 @@ def utility_processor():
         requests = db.session.query(friend_requests_table).filter_by(second_user_id=of_user.id).all()
         return len(requests)
 
+    def is_friend(user, list_holder):
+        return user in list_holder.friends
+
+    def is_requested(user, list_holder):
+        return user in list_holder.friend_requests
+
     return dict(
         get_item_name = get_item_name,
         get_list_name = get_list_name,
@@ -99,5 +105,7 @@ def utility_processor():
         get_completed_items_string = get_completed_items_string,
         get_length_of = get_length_of,
         censor_email = censor_email,
-        get_requests_number = get_requests_number
+        get_requests_number = get_requests_number,
+        is_friend = is_friend,
+        is_requested = is_requested
     )

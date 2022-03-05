@@ -55,6 +55,14 @@ main {
     white-space: nowrap;
 }
 
+.header-info .completed {
+    color: var(--clr-completed);
+}
+
+.header-info .pending {
+    color: rgb(236, 186, 46);
+}
+
 .header-info h1 {
     font-size: 2em;
 }
@@ -68,6 +76,41 @@ main {
 .header-info ion-icon {
     font-size: 1.5em;
     color: var(--clr-text-accent);
+}
+
+.header-info .actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.header-info .actions button {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2.5em;
+    aspect-ratio: 1 / 1;
+    padding: 0.25em;
+    border-radius: 0.5em;
+    border: 0.1em solid var(--clr-completed);
+    outline: none;
+    background-color: transparent;
+    transition: all .2s ease;
+}
+
+.header-info .actions button ion-icon {
+    color: var(--clr-completed);
+    font-size: 1.8em;
+    transition: all .2s ease;
+}
+
+.header-info .actions button:hover {
+    background-color: var(--clr-completed);
+} 
+
+.header-info .actions button:hover ion-icon {
+    color: var(--clr-background);
 }
 
 .lists-container {

@@ -22,8 +22,24 @@
             {% endif %}
         </div>
         <div class="header-info">
-            <h1>{{ user.username }}</h1>
-            {% if current_user == user %}
+            <div class="name">
+                <h1>{{ user.username }}</h1>
+                {% if current_user.is_authenticated and current_user != user %}
+                    {% if is_friend(user, current_user) %}
+                        <span class="completed">Amigo</span>
+                    {% elif is_requested(user, current_user) %}
+                        <span class="pending">Solicitud pendiente</span>    
+                    {% else %}
+                        <div class="actions">
+                            <button class="friend-add" add-user="{{ user.username }}">
+                                <ion-icon name="add"></ion-icon>
+                            </button>
+                            <span class="completed">Agregar como amigo</span>
+                        </div>
+                    {% endif %}
+                {% endif %}
+                {% if current_user == user %}
+            </div>
                 <a class="btn" href="{{ url_for('list.create') }}">
                     <ion-icon name="create"></ion-icon>
                     Crear lista nueva
@@ -86,6 +102,8 @@
         </section>
 
         <script src="{{ url_for('static', filename='imageRegionSelector.js') }}"></script>
-    {% endif %} 
+    {% endif %}
+
+    <script src="{{ url_for('static', filename='friendSearch.js') }}"></script>
 {% endblock content %}
     
