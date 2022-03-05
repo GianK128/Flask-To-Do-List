@@ -320,6 +320,27 @@ form .inputs input:focus-visible {
     color: var(--clr-disabled-icon);
 }
 
+/* BURBUJA DE SOLICITUDES */
+
+.request-bubble {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 15%;
+    left: 0;
+    color: #fff;
+    width: 1.25em;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    background-color: #e02222;
+    transform: translate(170%, 0);
+}
+
+.request-bubble .number {
+    font-size: 0.8em;
+}
+
 /* SIDEBAR */
 
 .sidebar {
@@ -438,6 +459,7 @@ form .inputs input:focus-visible {
 }
 
 .sidebar-nav li {
+    position: relative;
     width: 100%;
     /* padding: calc(var(--sidebar-width) * 0.1); */
 }

@@ -46,7 +46,7 @@ app.register_blueprint(list, url_prefix='/')
 app.register_blueprint(friends, url_prefix='/friends/')
 app.register_blueprint(settings, url_prefix='/settings/')
 
-from todo_list.models import Item, List, User
+from todo_list.models import Item, List, User, friend_requests_table
 
 @app.context_processor
 def utility_processor():
@@ -86,6 +86,10 @@ def utility_processor():
         s[1] = ".".join(s1)
         return "@".join(s)
 
+    def get_requests_number(of_user):
+        requests = db.session.query(friend_requests_table).filter_by(second_user_id=of_user.id).all()
+        return len(requests)
+
     return dict(
         get_item_name = get_item_name,
         get_list_name = get_list_name,
@@ -94,5 +98,6 @@ def utility_processor():
         get_pic_path_by_id = get_pic_path_by_id,
         get_completed_items_string = get_completed_items_string,
         get_length_of = get_length_of,
-        censor_email = censor_email
+        censor_email = censor_email,
+        get_requests_number = get_requests_number
     )

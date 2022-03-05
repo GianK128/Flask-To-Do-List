@@ -43,6 +43,11 @@
                             <li title="Amigos"><a class="sb-li" href="{{ url_for('friends.friend_list', username=current_user.username) }}">
                                 <ion-icon name="people"></ion-icon>
                                 <span class="sb-li-text sb-text-appear">Amigos</span>
+                                {% if get_requests_number(current_user) > 0 %}
+                                    <div class="request-bubble">
+                                        <span class="number">{{ get_requests_number(current_user) }}</span>
+                                    </div>
+                                {% endif %}
                             </a></li>
                         {% else %}
                             <li class="sb-li disabled" title="Amigos">
