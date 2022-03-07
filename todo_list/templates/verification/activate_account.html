@@ -1,4 +1,41 @@
-<h1>To Do List</h1>
-<p>{{ username }},</p>
-<p>Gracias por registrarse en mi aplicación. Por favor clickee en el siguiente link para completar el proceso de verificación de su cuenta.</p>
-<p><a href="{{ confirm_url }}">{{ confirm_url }}</a></p>
+<head>
+    <style>
+        .bg {
+            color: #000;
+            background-color: #fff;
+        }
+
+        header {
+            color: #000;
+            background-color: #f9f9f9;
+            padding: 0.5em 1.5em;
+            box-shadow: 0 0 10px #03030377;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+        }
+
+        .main {
+            padding: 1.5em;
+        }
+
+        p {
+            color: #000;
+        }
+
+        .large {
+            font-size: 1.5em;
+        }
+    </style>
+</head>
+<body class="bg">
+    <header>
+        <h1>To Do List</h1>
+    </header>
+    <div class="main">
+        <p class="large">{{ username }},</p>
+        <p>Gracias por registrarse en mi aplicación. Por favor clickee en el siguiente link para completar el proceso de verificación de su cuenta.</p>
+        <p><a href="{{ confirm_url }}">{{ confirm_url }}</a></p>
+    </div>
+</body>
