@@ -1,7 +1,7 @@
 = TODO:
 - CSS Inicio
-- CSS Correos
 
 = QoL:
 - Hacer CSS y JS
 - Hacer Logo para la página.
+- Agregar Logo a Correos.
