@@ -3,5 +3,3 @@
 
 = QoL:
 - Hacer CSS y JS
-- Hacer Logo para la página.
-- Agregar Logo a Correos.
