@@ -4,16 +4,19 @@ from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_mail import Mail
+from dotenv import load_dotenv
 from os import environ
 from os.path import abspath, dirname, join
 import datetime
+
+load_dotenv()
 
 DB_NAME = "usernotes.db"
 UPLOAD_FOLDER_PATH = join(abspath(dirname(__file__)), 'static', 'uploads')
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'c9d1cd6d3e0a4fb54a653b98'
-app.config['SECURITY_PASSWORD_SALT'] = '19e2e8d192515eb0c3708d1c'
+app.config['SECRET_KEY'] = environ['APP_SECRET_KEY']
+app.config['SECURITY_PASSWORD_SALT'] = environ['APP_SECURITY_PASSWORD_SALT']
 app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER_PATH
 
@@ -22,7 +25,7 @@ app.config['MAIL_PORT'] = 465
 app.config['MAIL_USE_SSL'] = True
 app.config['MAIL_USERNAME'] = environ['APP_MAIL_USERNAME']
 app.config['MAIL_PASSWORD'] = environ['APP_MAIL_PASSWORD']
-app.config['MAIL_DEFAULT_SENDER'] = 'giankeberlein.dev@gmail.com'
+app.config['MAIL_DEFAULT_SENDER'] = environ['APP_MAIL_USERNAME']
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
