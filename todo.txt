@@ -1,5 +1,9 @@
 = TODO:
-- CSS Inicio
+- CSS Landing Page
+- Deploy
+
+= FIX:
+- Problemas de CSS repartidos por la página
 
 = QoL:
 - Hacer CSS y JS
