@@ -94,5 +94,4 @@ def unconfirmed():
 @login_required
 def logout():
     logout_user()
-    flash("Te desconectaste del sitio.", category='info')
     return redirect(url_for('routes.home'))
