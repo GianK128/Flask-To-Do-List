@@ -76,3 +76,15 @@ document.querySelectorAll('form .inputs input').forEach(input => {
         document.querySelector(`label[for=${name}]`).classList.remove('current-focus');
     });
 });
+
+// NAV de página de inicio
+
+if (topbar) {
+    window.addEventListener('scroll', () => {
+        if (window.scrollY != 0) {
+            topbar.classList.remove('in-start');
+        } else {
+            topbar.classList.add('in-start');
+        }
+    })
+}

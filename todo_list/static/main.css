@@ -73,19 +73,28 @@ ion-icon {
 .btn {
     cursor: pointer;
     width: fit-content;
-    padding: 0.5em;
+    padding: 0.75em;
     border: none;
     outline: none;
-    border-radius: 0.25em;
+    border-radius: 0.5em;
     color: var(--clr-text-accent);
+    border: 0.1em solid var(--clr-text-accent);
     background-color: var(--clr-sidebar-highlight);
-}
-.btn:hover {
-    filter: brightness(80%);
+    transition: all .3s ease;
 }
 .btn-primary {
     color: #eee;
-    background: var(--gradient-background);
+    background: var(--clr-mid-color);
+}
+.btn-primary:hover {
+    background: var(--clr-text-accent);
+}
+.btn-secondary {
+    background-color: transparent;
+}
+.btn-secondary:hover {
+    color: #eee;
+    background: var(--clr-mid-color);
 }
 .btn-circle {
     border-radius: 50%;
@@ -96,9 +105,6 @@ ion-icon {
 }
 .btn-border button {
     border: 0.3em solid var(--clr-background);
-}
-body[dark-mode] .btn:hover {
-    filter: brightness(120%);
 }
 
 /* ALERTAS */
@@ -603,6 +609,8 @@ form .inputs input:focus-visible {
     justify-content: space-between;
     align-items: center;
     background-color: var(--clr-sidebar);
+    transition: all .2s ease;
+    z-index: 20;
 }
 
 .topbar .header-logo {
