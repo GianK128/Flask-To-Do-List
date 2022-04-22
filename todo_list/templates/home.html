@@ -15,7 +15,7 @@
         <div class="flex quick-card-container">
             <a href="{{ url_for('list.create') }}">
                 <button class="flex flex-column quick-card">
-                    <div class="header" style="background-color: #459a56;">
+                    <div class="header">
                         <ion-icon name="create"></ion-icon>
                     </div>
                     <div class="content">
@@ -31,7 +31,7 @@
             </a>
             <a href="{{ url_for('list.my_lists', user = current_user.username) }}">
                 <button class="flex flex-column quick-card">
-                    <div class="header" style="background-color: rgb(221, 178, 37);">
+                    <div class="header">
                         <ion-icon name="person"></ion-icon>
                     </div>
                     <div class="content">
@@ -47,7 +47,7 @@
             </a>
             <a href="{{ url_for('friends.friend_list', username = current_user.username) }}">
                 <button class="flex flex-column quick-card">
-                    <div class="header" style="background-color: rgb(197, 45, 34);">
+                    <div class="header">
                         <ion-icon name="people"></ion-icon>
                     </div>
                     <div class="content">
