@@ -191,6 +191,7 @@
 {% endblock content %}
 
 {% block footer_content %}
+    {% if not current_user.is_authenticated %}
     <footer>
         <div class="links">
             <a href="https://github.com/GianK128" target="_blank" rel="noopener noreferral">
@@ -202,5 +203,6 @@
         </div>
         <p>Diseñado y desarrollado por Gian Keberlein © 2022</p>
     </footer>
+    {% endif %}
 {% endblock footer_content %}
     
