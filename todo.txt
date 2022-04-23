@@ -1,9 +1,5 @@
 = TODO:
-- CSS Landing Page
-- Deploy
+- Hacer deploy
 
-= FIX:
-- Problemas de CSS repartidos por la página
-
-= QoL:
-- Hacer CSS y JS
+= Futuras versiones:
+- Pasar frontend a React
