@@ -9,10 +9,12 @@
 {% endblock head_content %}
 
 {% block content %}
-    <div class="container">
-        <h1>Verificar cuenta</h1>
-        <p class="text">Aun no ha verificado su correo electrónico.</p>
-        <button class="btn btn-primary" id='sendBtn'>Enviar correo</button>
+    <div class="wrapper">
+        <div class="container">
+            <h1>Verificar cuenta</h1>
+            <p class="text">Aun no ha verificado su correo electrónico.</p>
+            <button class="btn btn-primary" id='sendBtn'>Enviar correo</button>
+        </div>
     </div>
 
     <script src="{{ url_for('static', filename='mailSend.js') }}"></script>

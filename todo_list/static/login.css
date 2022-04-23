@@ -7,11 +7,31 @@ main {
     height: 90vh;
 }
 
+.btn-disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    border-color: var(--clr-text-obscured);
+    color: var(--clr-text-obscured);
+    background-color: var(--clr-disabled);
+}
+
+.btn-disabled:hover {
+    background-color: var(--clr-disabled);
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
 .container {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 35%;
+    min-width: 35vw;
     padding: 3em;
     border-radius: 0.5em;
     background-color: var(--clr-sidebar);
@@ -58,7 +78,6 @@ main {
 
 .container form input[type=submit] {
     width: 100%;
-    height: 2.5em;
     font-size: 1em;
 }
 
