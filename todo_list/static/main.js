@@ -81,10 +81,27 @@ document.querySelectorAll('form .inputs input').forEach(input => {
 
 if (topbar) {
     window.addEventListener('scroll', () => {
-        if (window.scrollY != 0) {
+        if (window.scrollY > 0) {
             topbar.classList.remove('in-start');
         } else {
             topbar.classList.add('in-start');
         }
     })
 }
+
+// Smooth scroll from anchor
+function scrollToInfo() {
+    document.querySelector("#info").scrollIntoView({
+        behavior: 'smooth'
+    });
+}
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});

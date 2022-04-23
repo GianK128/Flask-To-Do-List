@@ -127,6 +127,9 @@
         {% endblock content %}
     </main>
     
+    {% block footer_content %}
+    {% endblock footer_content %}
+
     <script>
         let theme = localStorage.getItem('preferred-theme');
         const darkModeText = document.getElementById('dark-mode-text');

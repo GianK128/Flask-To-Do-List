@@ -119,7 +119,10 @@
                             C40,50 55,60 45,100
                             L0,100z" 
                     fill="#1f1f1f" />
-            </svg>    
+            </svg>
+            <button onclick="scrollToInfo()" class="chevron">
+                <ion-icon name="chevron-down"></ion-icon>
+            </button>
             <div class="content">
                 <div class="left">
                     <h1>Organízate y compártelo con tus amigos u otras personas</h1>
@@ -134,11 +137,70 @@
                     </p>
                     <div class="buttons">
                         <a href="{{ url_for('auth.sign_up') }}" class="btn btn-primary">Registrarse</a>
-                        <a href="" class="btn btn-secondary">Más información</a>
+                        <a id="moreInfo" href="#info" class="btn btn-secondary">Más información</a>
                     </div>
                 </section>
             </div>
         </div>
+        <div id="info" class="info">
+            <section>
+                <div class="content">
+                    <h2>Arma tu lista de tareas</h2>
+                    <p>
+                        <span class="text-highlight">Crea tu lista</span> con sólo un par de clicks y <span class="text-highlight">agrega tus items</span>, tantos como necesites.
+                        
+                        Son fáciles de manejar y navegar, ya sean tuyas o de tus amigos.
+                    </p>
+                </div>
+                <div class="images">
+                    <div class="image">
+                        <img src="{{ url_for('static', filename='media/demo-lists-1.png') }}" alt="Preview de listas">
+                    </div>
+                </div>
+            </section>
+            <div class="divider"></div>
+            <section>
+                <div class="images">
+                    <div class="image">
+                        <img src="{{ url_for('static', filename='media/demo-friends.png') }}" alt="Preview de listas">
+                    </div>
+                </div>
+                <div class="content">
+                    <h2>Agrega a tus amigos</h2>
+                    <p>
+                        <span class="text-highlight">Busca</span> a tus amigos que posean una cuenta y <span class="text-highlight">enviales una solicitud</span> para poder compartir sus avances.
+                    </p>
+                </div>
+            </section>
+            <div class="divider"></div>
+            <section>
+                <div class="content">
+                    <h2>Comparte tu progreso</h2>
+                    <p>
+                        Casi todas las acciones que hagas <span class="text-highlight">se documentan</span>, de manera que puedes ver el progreso de <span class="text-highlight">tus amigos</span> y el tuyo en el historial, si asi lo deseas.
+                    </p>
+                </div>
+                <div class="images">
+                    <div class="image">
+                        <img src="{{ url_for('static', filename='media/demo-home.png') }}" alt="Preview de listas">
+                    </div>
+                </div>
+            </section>
+        </div>
     {% endif %}
 {% endblock content %}
+
+{% block footer_content %}
+    <footer>
+        <div class="links">
+            <a href="https://github.com/GianK128" target="_blank" rel="noopener noreferral">
+                <ion-icon name="logo-github"></ion-icon>
+            </a>
+            <a href="https://www.linkedin.com/in/giankeberlein/" target="_blank" rel="noopener noreferral">
+                <ion-icon name="logo-linkedin"></ion-icon>
+            </a>
+        </div>
+        <p>Diseñado y desarrollado por Gian Keberlein © 2022</p>
+    </footer>
+{% endblock footer_content %}
     
