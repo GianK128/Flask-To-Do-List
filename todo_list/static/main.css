@@ -67,6 +67,7 @@ a {
 ion-icon {
     pointer-events: none;
     color: var(--clr-sidebar-li);
+    transition: all .3s ease;
 }
 
 /* BOTONES */
@@ -95,6 +96,9 @@ ion-icon {
 .btn-secondary:hover {
     color: #eee;
     background: var(--clr-mid-color);
+}
+.btn-secondary:hover ion-icon {
+    color: #eee;
 }
 .btn-circle {
     border-radius: 50%;
