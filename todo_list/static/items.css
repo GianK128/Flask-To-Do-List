@@ -176,3 +176,7 @@ span.pending {
 .item-form form .inputs input {
     width: 75%;
 }
+
+.item-form form input[type="submit"] {
+    width: 25%;
+}

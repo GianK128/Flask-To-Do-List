@@ -78,9 +78,9 @@
                 </div>
                 <div class="modal-body item-form">
                     <form action="{{ url_for('list.add_item') }}" method="POST">
+                        {{ form.hidden_tag() }}
+                        {{ form.list_id(value=list.id, type="hidden") }}
                         <div class="inputs">
-                            {{ form.hidden_tag() }}
-                            {{ form.list_id(value=list.id, type="hidden") }}
                             {{ form.content.label() }}
                             {{ form.content() }}
                         </div>

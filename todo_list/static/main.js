@@ -63,6 +63,10 @@ document.querySelectorAll('.close-modal').forEach(modalClose => {
 // INPUTS BONITOS
 
 document.querySelectorAll('form .inputs input').forEach(input => {
+    if (input.value !== "") {
+        document.querySelector(`label[for=${input.getAttribute('name')}]`).classList.add('focus');
+        document.querySelector(`label[for=${input.getAttribute('name')}]`).classList.add('current-focus');
+    }
     input.addEventListener('focus', e => {
         let name = e.target.getAttribute('name');
         document.querySelector(`label[for=${name}]`).classList.add('focus');
