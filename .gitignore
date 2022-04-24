@@ -12,3 +12,6 @@ uploads/
 
 # Entorno virtual
 flask-todo/
+
+# Development
+create_database.py
