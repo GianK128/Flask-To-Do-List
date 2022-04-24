@@ -1,5 +1,3 @@
-= TODO:
-- Hacer deploy
-
 = Futuras versiones:
+- Diseño para moviles
 - Pasar frontend a React
