@@ -1,4 +1,8 @@
-from todo_list import app
+from todo_list import app as application
 
-if __name__ == "__main__":
-    app.run(debug=True)
+# Production
+app = application
+
+# Development
+#if __name__ == "__main__":
+#   app.run(debug=True)
