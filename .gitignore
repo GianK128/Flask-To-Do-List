@@ -9,3 +9,6 @@ uploads/
 
 # Variables de entorno
 .env
+
+# Entorno virtual
+flask-todo/
