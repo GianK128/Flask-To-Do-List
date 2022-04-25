@@ -16,7 +16,7 @@
 <li><a href="#objetivos-del-proyecto">Objetivos del proyecto</a>.</li>
 <li><a href="#herramientas-utilizadas">Herramientas utilizadas</a>.</li>
 <li><a href="#como-usar">Como usar</a>.</li>
-<li><a href="##visión-a-futuro">Visión a futuro</a>.</li>
+<li><a href="#visión-a-futuro">Visión a futuro</a>.</li>
 </ol>
 </details>
 
