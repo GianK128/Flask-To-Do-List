@@ -1,3 +1,3 @@
 = Futuras versiones:
-- Diseño para moviles
-- Pasar frontend a React
+- Diseño Responsive
+- Pasar frontend a React y API REST
