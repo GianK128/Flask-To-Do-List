@@ -8,6 +8,10 @@ from os import environ
 from os.path import abspath, dirname, join
 import datetime
 
+# Solo en development
+# from dotenv import load_dotenv
+# load_dotenv()
+
 DB_NAME = "usernotes.db"
 UPLOAD_FOLDER_PATH = join(abspath(dirname(__file__)), 'static', 'uploads')
 
